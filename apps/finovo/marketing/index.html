@@ -94,6 +94,7 @@
     font-weight: 700;
     color: var(--text);
     letter-spacing: -0.3px;
+    text-decoration: none;
   }
   .nav-logo span { color: var(--green); }
 
@@ -679,12 +680,25 @@
   }
   .hero > * { position: relative; z-index: 1; }
 
-  .hero-icon {
+  .hero-wordmark {
+    font-size: 96px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    color: var(--text);
+    text-align: center;
+    margin: 0 auto 20px;
+    line-height: 1;
     animation: floaty 5s ease-in-out infinite;
-    box-shadow:
-      0 20px 40px rgba(34,197,94,0.35),
-      0 8px 16px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .hero-wordmark span {
+    background: linear-gradient(135deg, #22C55E 0%, #16A34A 60%, #15803D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  @media (max-width: 768px) {
+    .hero-wordmark { font-size: 64px; letter-spacing: -2px; }
   }
   @keyframes floaty {
     0%, 100% { transform: translateY(0); }
@@ -924,7 +938,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
-    .hero-icon, .hero::after, .hero-eyebrow .dot { animation: none !important; }
+    .hero-wordmark, .hero::after, .hero-eyebrow .dot { animation: none !important; }
   }
 
   /* Staggered phone layout */
@@ -1225,9 +1239,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-icon">
-    <img src="assets/screens/appicon-hero.jpg" loading="lazy" decoding="async" alt="Finovo App Icon">
-  </div>
+  <div class="hero-wordmark" aria-label="Finovo">Fin<span>OVO</span></div>
   <div class="hero-eyebrow"><span class="dot"></span><span class="i18n-de">Launching 2026 · iOS 17+</span><span class="i18n-en">Launching 2026 · iOS 17+</span></div>
   <h1>
     <span class="i18n-de">Finanzen im <span class="green">Griff.</span></span>
