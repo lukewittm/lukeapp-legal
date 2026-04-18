@@ -10,14 +10,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary:   #1A5CFF;
+      --primary:       #1A5CFF;
       --primary-light: #EEF3FF;
-      --text:      #1A1A2E;
-      --muted:     #666680;
-      --border:    #E0E4F0;
-      --bg:        #F8F9FF;
-      --white:     #FFFFFF;
-      --radius:    12px;
+      --text:          #1A1A2E;
+      --muted:         #666680;
+      --border:        #E0E4F0;
+      --bg:            #F8F9FF;
+      --white:         #FFFFFF;
+      --radius:        12px;
     }
 
     body {
@@ -28,7 +28,6 @@
       font-size: 16px;
     }
 
-    /* ── Header ── */
     header {
       background: var(--white);
       border-bottom: 1px solid var(--border);
@@ -45,27 +44,42 @@
       gap: 12px;
     }
     .app-icon {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       background: var(--primary);
       border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
     .app-icon svg { width: 20px; height: 20px; fill: white; }
     .header-title { font-size: 17px; font-weight: 700; color: var(--text); }
     .header-sub   { font-size: 12px; color: var(--muted); margin-top: 1px; }
+    .header-spacer { flex: 1; }
 
-    /* ── Layout ── */
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      background: transparent;
+      color: var(--text);
+      border: 0;
+      padding: 6px 12px;
+      cursor: pointer;
+      font: 600 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--primary);
+      color: #fff;
+    }
+
     main {
       max-width: 760px;
       margin: 0 auto;
       padding: 40px 24px 80px;
     }
 
-    /* ── Hero ── */
     .hero {
       background: var(--white);
       border: 1px solid var(--border);
@@ -74,37 +88,28 @@
       margin-bottom: 32px;
     }
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      display: inline-flex; align-items: center; gap: 6px;
       background: var(--primary-light);
       color: var(--primary);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
       margin-bottom: 14px;
     }
     .hero h1 {
-      font-size: 28px;
-      font-weight: 800;
+      font-size: 28px; font-weight: 800;
       color: var(--text);
       margin-bottom: 10px;
       letter-spacing: -0.4px;
     }
     .hero p { color: var(--muted); font-size: 15px; }
     .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 20px;
-      padding-top: 20px;
+      display: flex; flex-wrap: wrap; gap: 16px;
+      margin-top: 20px; padding-top: 20px;
       border-top: 1px solid var(--border);
     }
     .meta-item { font-size: 13px; color: var(--muted); }
     .meta-item strong { color: var(--text); font-weight: 600; }
 
-    /* ── Info box ── */
     .info-box {
       background: var(--primary-light);
       border: 1px solid #c8d8ff;
@@ -113,13 +118,10 @@
       margin-bottom: 32px;
       font-size: 14px;
       color: var(--text);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
+      display: flex; gap: 12px; align-items: flex-start;
     }
     .info-box .icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
 
-    /* ── Sections ── */
     .section {
       background: var(--white);
       border: 1px solid var(--border);
@@ -128,88 +130,60 @@
       margin-bottom: 20px;
     }
     .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      display: flex; align-items: center; gap: 12px;
       margin-bottom: 18px;
       padding-bottom: 14px;
       border-bottom: 2px solid var(--primary-light);
     }
     .section-num {
-      width: 30px;
-      height: 30px;
+      width: 30px; height: 30px;
       background: var(--primary);
       color: white;
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
       flex-shrink: 0;
     }
-    .section h2 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .section h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      margin: 20px 0 8px;
-    }
+    .section h2 { font-size: 18px; font-weight: 700; color: var(--text); }
+    .section h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 20px 0 8px; }
     .section p  { font-size: 15px; color: var(--text); margin-bottom: 12px; }
     .section p:last-child { margin-bottom: 0; }
     .section ul { padding-left: 20px; margin-bottom: 12px; }
     .section ul li { font-size: 15px; color: var(--text); margin-bottom: 6px; }
 
-    /* ── Tables ── */
     .table-wrap { overflow-x: auto; margin: 14px 0; border-radius: 8px; border: 1px solid var(--border); }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
     thead th {
-      background: var(--primary);
-      color: white;
-      padding: 10px 14px;
-      text-align: left;
-      font-weight: 600;
-      font-size: 13px;
+      background: var(--primary); color: white;
+      padding: 10px 14px; text-align: left;
+      font-weight: 600; font-size: 13px;
     }
-    thead th:first-child { border-radius: 0; }
     tbody tr:nth-child(even) { background: var(--bg); }
     tbody tr:nth-child(odd)  { background: var(--white); }
     tbody td { padding: 10px 14px; color: var(--text); border-bottom: 1px solid var(--border); vertical-align: top; }
     tbody tr:last-child td { border-bottom: none; }
     td strong { color: var(--primary); font-weight: 600; }
 
-    /* ── Rights table ── */
     .right-label { color: var(--primary); font-weight: 700; }
     .article-badge {
       display: inline-block;
       background: var(--primary-light);
       color: var(--primary);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 4px;
+      font-size: 11px; font-weight: 600;
+      padding: 2px 7px; border-radius: 4px;
     }
 
-    /* ── No tracking badge ── */
     .no-tracking {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      display: flex; align-items: center; gap: 10px;
       background: #F0FFF4;
       border: 1px solid #86efac;
       border-radius: 8px;
       padding: 12px 16px;
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 14px; font-weight: 600;
       color: #166534;
       margin-bottom: 12px;
     }
 
-    /* ── Footer ── */
     footer {
       max-width: 760px;
       margin: 0 auto;
@@ -224,10 +198,15 @@
 
     a { color: var(--primary); }
 
+    .lang { display: none; }
+    .lang.active { display: block; }
+
     @media (max-width: 600px) {
       .hero, .section { padding: 20px 18px; }
       .hero h1 { font-size: 22px; }
       .meta-row { gap: 10px; }
+      .header-inner { gap: 10px; }
+      .header-title { font-size: 15px; }
     }
   </style>
 </head>
@@ -242,14 +221,21 @@
     </div>
     <div>
       <div class="header-title">Finovo</div>
-      <div class="header-sub">Datenschutzerklärung</div>
+      <div class="header-sub" id="header-sub">Datenschutzerklärung</div>
+    </div>
+    <div class="header-spacer"></div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
   </div>
 </header>
 
 <main>
 
-  <!-- Hero -->
+<!-- =================== DEUTSCH =================== -->
+<div class="lang active" data-lang="de">
+
   <div class="hero">
     <div class="badge">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
@@ -260,18 +246,30 @@
     <div class="meta-row">
       <div class="meta-item"><strong>App:</strong> Finovo (iOS)</div>
       <div class="meta-item"><strong>Verantwortlicher:</strong> Lukas Wittmann</div>
-      <div class="meta-item"><strong>Kontakt:</strong> <a href="mailto:lukas@lukeapp.de">lukas@lukeapp.de</a></div>
-      <div class="meta-item"><strong>Stand:</strong> März 2026 · Version 1.0</div>
+      <div class="meta-item"><strong>Kontakt:</strong> <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a></div>
+      <div class="meta-item"><strong>Stand:</strong> 18. April 2026 · Version 2.0</div>
     </div>
   </div>
 
-  <!-- Key fact -->
   <div class="info-box">
     <div class="icon">🔒</div>
-    <div><strong>Wichtig:</strong> Finovo betreibt keine eigenen Server. Alle Daten werden ausschließlich lokal auf Ihrem Gerät und — im Fall von Partner Mode — in Ihrem persönlichen iCloud-Konto gespeichert. Wir verkaufen keine Daten und verwenden keine Werbe-SDKs.</div>
+    <div><strong>Wichtig:</strong> Finovo betreibt keine eigenen Server. Alle Daten werden lokal auf Ihrem Gerät gespeichert und – sofern Sie iCloud verwenden – in <em>Ihrem eigenen</em> iCloud-Konto über Apple CloudKit synchronisiert. Es gibt keine Werbe-SDKs, keine Analyse-Tools und keinen Datenverkauf.</div>
   </div>
 
-  <!-- 1. Verarbeitete Daten -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">0</div>
+      <h2>Verantwortlicher</h2>
+    </div>
+    <p>Verantwortlicher im Sinne des Art. 4 Nr. 7 DSGVO ist:</p>
+    <p>
+      Lukas Wittmann – Einzelunternehmer<br>
+      Erlenstraße 10A<br>
+      91074 Herzogenaurach, Deutschland<br>
+      E-Mail: <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>
+    </p>
+  </div>
+
   <div class="section">
     <div class="section-header">
       <div class="section-num">1</div>
@@ -294,15 +292,14 @@
           <tr><td><strong>Finanztransaktionen</strong></td><td>Betrag, Kategorie, Datum, Notiz</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
           <tr><td><strong>Budgets &amp; Kategorien</strong></td><td>Kategoriename, Budgetlimit</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
           <tr><td><strong>Sparziele</strong></td><td>Zielname, Betrag, Deadline</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
-          <tr><td><strong>App-Einstellungen</strong></td><td>Sprache, Onboarding-Status</td><td>Lokal (UserDefaults)</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
-          <tr><td><strong>Abonnementstatus</strong></td><td>Aktiver Plan</td><td>Apple / App Store</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+          <tr><td><strong>App-Einstellungen</strong></td><td>Sprache, Onboarding-Status, Filter</td><td>Lokal (UserDefaults)</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+          <tr><td><strong>Abonnementstatus</strong></td><td>Aktiver Plan, Ablaufdatum</td><td>Apple / lokal</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:13px; color: var(--muted);">¹ iCloud-Speicherung nur bei aktiviertem Partner Mode (Abonnement erforderlich).</p>
+    <p style="font-size:13px; color: var(--muted);">¹ iCloud-Synchronisation erfolgt nur, wenn Sie auf Ihrem Gerät bei iCloud angemeldet sind und iCloud für Finovo aktiviert haben. Kann in den iOS-Einstellungen jederzeit deaktiviert werden.</p>
   </div>
 
-  <!-- 2. Zwecke -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">2</div>
@@ -312,14 +309,13 @@
     <ul>
       <li>Bereitstellung der App-Funktionen (Transaktionsverfolgung, Budgetplanung, Sparziele)</li>
       <li>Berechnung proportionaler Ausgabenteilung anhand von Einkommensdaten</li>
-      <li>Geräteübergreifende Synchronisierung über iCloud (nur Partner Mode)</li>
-      <li>Teilen von Haushaltsdaten mit einem Partner über CloudKit (nur bei aktivierter Freigabe)</li>
-      <li>Abwicklung von In-App-Käufen (Abonnement Partner Mode, über Apple)</li>
+      <li>Geräteübergreifende Synchronisierung über iCloud/CloudKit</li>
+      <li>Teilen von Haushaltsdaten mit einem Partner über CloudKit Sharing (nur Partner-Modus)</li>
+      <li>Abwicklung von In-App-Käufen (Abonnement Partner-Modus, über Apple)</li>
     </ul>
     <p>Es findet <strong>keine</strong> Verarbeitung für Werbezwecke, kein Profiling und keine automatisierte Entscheidungsfindung im Sinne des Art. 22 DSGVO statt.</p>
   </div>
 
-  <!-- 3. Rechtsgrundlagen -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
@@ -331,35 +327,35 @@
           <tr><th>Grundlage</th><th>Anwendungsfall</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Art. 6 Abs. 1 lit. a</strong> – Einwilligung</td><td>Optionales Profilbild</td></tr>
+          <tr><td><strong>Art. 6 Abs. 1 lit. a</strong> – Einwilligung</td><td>Optionales Profilbild, optionale Benachrichtigungen, optionales Partner-Sharing</td></tr>
           <tr><td><strong>Art. 6 Abs. 1 lit. b</strong> – Vertragserfüllung</td><td>Alle für den App-Betrieb notwendigen Daten (Transaktionen, Einkommen, Budgets, Abonnement)</td></tr>
-          <tr><td><strong>Art. 6 Abs. 1 lit. f</strong> – Berechtigte Interessen</td><td>Fehlerbehebung und App-Stabilität (nur auf Systemebene durch Apple, ohne Erfassung personenbezogener Daten)</td></tr>
+          <tr><td><strong>Art. 6 Abs. 1 lit. f</strong> – Berechtigte Interessen</td><td>Funktionsfähige, sichere App; Fehlerbehebung auf Systemebene durch Apple</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- 4. Datenspeicherung -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">4</div>
       <h2>Datenspeicherung &amp; Löschung</h2>
     </div>
     <h3>4.1 Lokale Speicherung</h3>
-    <p>Alle Daten werden primär lokal auf Ihrem iOS-Gerät gespeichert. Sie können sämtliche Daten jederzeit durch Löschen der App vollständig entfernen. Die App bietet zusätzlich eine manuelle „Daten zurücksetzen"-Funktion in den Einstellungen.</p>
-    <h3>4.2 iCloud-Speicherung (Partner Mode)</h3>
-    <p>Im Partner Mode werden Daten über Apple CloudKit in Ihrem persönlichen iCloud-Konto gespeichert. Diese Daten können über <em>Einstellungen → [Ihr Name] → iCloud → iCloud-Daten verwalten</em> auf iOS gelöscht werden.</p>
-    <h3>4.3 Speicherdauer</h3>
+    <p>Alle Daten werden primär lokal auf Ihrem iOS-Gerät gespeichert (SwiftData, UserDefaults, Keychain für sensible Flags). Durch Deinstallation der App werden alle lokalen Daten entfernt. Die App bietet zusätzlich eine „Daten zurücksetzen"-Funktion in den Einstellungen.</p>
+    <h3>4.2 iCloud-Speicherung (CloudKit)</h3>
+    <p>Sofern Sie iCloud verwenden, werden Ihre Daten über Apple CloudKit in <em>Ihrer eigenen</em> privaten iCloud-Datenbank gespeichert. Der Entwickler hat keinen Zugriff auf diese Daten. iCloud-Daten können über <em>Einstellungen → [Ihr Name] → iCloud → Speicher verwalten → Finovo</em> entfernt werden.</p>
+    <h3>4.3 Löschmarker („Tombstones")</h3>
+    <p>Beim Löschen eines Eintrags wird kurzzeitig ein Löschmarker aufbewahrt, damit die Löschung auch auf Ihre weiteren Geräte übertragen wird. Anschließend wird er automatisch komprimiert entfernt.</p>
+    <h3>4.4 Speicherdauer</h3>
     <p>Daten werden für die gesamte Nutzungsdauer gespeichert und auf Wunsch sofort gelöscht. Es bestehen keine gesetzlichen Aufbewahrungspflichten für die innerhalb der App gespeicherten Haushaltsdaten.</p>
   </div>
 
-  <!-- 5. Dritte -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">5</div>
       <h2>Weitergabe an Dritte</h2>
     </div>
-    <p>Finovo gibt Ihre Daten nicht an Dritte weiter und enthält keine Werbe-SDKs. Folgende Parteien sind technisch involviert:</p>
+    <p>Finovo gibt Ihre Daten nicht an Dritte weiter und enthält keine Werbe- oder Analyse-SDKs. Technisch involviert sind ausschließlich Apple-Dienste:</p>
     <div class="table-wrap">
       <table>
         <thead>
@@ -368,36 +364,35 @@
         <tbody>
           <tr>
             <td><strong>Apple Inc. – iCloud / CloudKit</strong></td>
-            <td>Geräteübergreifende Sync, Partner-Sharing (nur Partner Mode)</td>
-            <td>EU-US Data Privacy Framework; <a href="https://www.apple.com/de/privacy/" target="_blank" rel="noopener">Apple Datenschutz</a></td>
+            <td>Geräteübergreifende Sync, Partner-Sharing</td>
+            <td>Auftragsverarbeitung; EU-US Data Privacy Framework; <a href="https://www.apple.com/de/legal/privacy/" target="_blank" rel="noopener">Apple Datenschutz</a></td>
           </tr>
           <tr>
             <td><strong>Apple Inc. – App Store / StoreKit</strong></td>
             <td>Abonnementverwaltung, Zahlungsabwicklung</td>
-            <td>Apple fungiert als Zahlungsabwickler (Art. 28 DSGVO)</td>
+            <td>Apple fungiert als eigenständiger Verantwortlicher für die Zahlungsabwicklung</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p>Apple Inc. hat seinen Sitz in den USA. Die Datenschutz-Compliance wird durch Apples Teilnahme am EU-US Data Privacy Framework gewährleistet.</p>
+    <p>Apple Inc. hat seinen Sitz in den USA. Datenübermittlungen in die USA stützen sich auf Apples Teilnahme am EU-US Data Privacy Framework sowie auf Standardvertragsklauseln.</p>
+    <p>Zahlungsdaten (Apple-ID, Zahlungsmittel) erreichen den Entwickler nicht. Apple stellt lediglich aggregierte, nicht personenbezogene Verkaufsberichte bereit.</p>
   </div>
 
-  <!-- 6. Partner-Sharing -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">6</div>
       <h2>Freigabe von Daten an einen Partner</h2>
     </div>
-    <p>Wenn Sie die Partner-Sharing-Funktion aktivieren (nur Partner Mode), werden ausgewählte Haushaltsdaten über Apple CloudKit mit dem iCloud-Konto Ihres Partners geteilt. Dabei gilt:</p>
+    <p>Wenn Sie den Partner-Modus aktivieren und eine Freigabe erzeugen, werden ausgewählte Haushaltsdaten über Apple CloudKit Sharing (CKShare) mit dem iCloud-Konto der eingeladenen Person geteilt. Dabei gilt:</p>
     <ul>
       <li>Sie kontrollieren vollständig, ob und mit wem Sie teilen. Die Freigabe erfolgt aktiv über die iOS-Systemdialoge.</li>
-      <li>Sie können die Freigabe jederzeit widerrufen.</li>
+      <li>Sie können die Freigabe jederzeit widerrufen; die weitere Synchronisation geteilter Inhalte endet dann.</li>
       <li>Die Datenübertragung ist TLS-verschlüsselt und läuft ausschließlich über Apples iCloud-Infrastruktur.</li>
-      <li>Einkommensdaten werden <strong>nicht</strong> automatisch geteilt — sie dienen nur zur lokalen Berechnung von Aufteilungsverhältnissen.</li>
+      <li>Einkommensdaten werden <strong>nicht</strong> automatisch geteilt – sie dienen nur zur lokalen Berechnung von Aufteilungsverhältnissen.</li>
     </ul>
   </div>
 
-  <!-- 7. Ihre Rechte -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">7</div>
@@ -413,72 +408,324 @@
           <tr><td class="right-label">Berichtigung</td><td><span class="article-badge">Art. 16</span></td><td>Unrichtige Daten können jederzeit direkt in der App korrigiert werden.</td></tr>
           <tr><td class="right-label">Löschung</td><td><span class="article-badge">Art. 17</span></td><td>Einstellungen → Daten zurücksetzen, oder App deinstallieren.</td></tr>
           <tr><td class="right-label">Einschränkung</td><td><span class="article-badge">Art. 18</span></td><td>iCloud-Sync kann in den iOS-Einstellungen deaktiviert werden.</td></tr>
-          <tr><td class="right-label">Datenübertragbarkeit</td><td><span class="article-badge">Art. 20</span></td><td>Einstellungen → Export (CSV/JSON) — alle Daten in maschinenlesbarem Format.</td></tr>
-          <tr><td class="right-label">Widerruf der Einwilligung</td><td><span class="article-badge">Art. 7 Abs. 3</span></td><td>Profilbild jederzeit in der App entfernen.</td></tr>
-          <tr><td class="right-label">Widerspruch</td><td><span class="article-badge">Art. 21</span></td><td>Bei Verarbeitung auf Basis von Art. 6 Abs. 1 lit. f: schriftlich an <a href="mailto:lukas@lukeapp.de">lukas@lukeapp.de</a>.</td></tr>
+          <tr><td class="right-label">Datenübertragbarkeit</td><td><span class="article-badge">Art. 20</span></td><td>Einstellungen → Export (CSV) – alle Daten in maschinenlesbarem Format.</td></tr>
+          <tr><td class="right-label">Widerruf der Einwilligung</td><td><span class="article-badge">Art. 7 Abs. 3</span></td><td>Profilbild, Benachrichtigungen und Freigaben jederzeit deaktivierbar.</td></tr>
+          <tr><td class="right-label">Widerspruch</td><td><span class="article-badge">Art. 21</span></td><td>Bei Verarbeitung auf Basis von Art. 6 Abs. 1 lit. f: schriftlich an <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>.</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Anfragen werden innerhalb von 30 Tagen beantwortet: <a href="mailto:lukas@lukeapp.de">lukas@lukeapp.de</a></p>
+    <p>Anfragen werden innerhalb von 30 Tagen beantwortet: <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a></p>
   </div>
 
-  <!-- 8. Beschwerderecht -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">8</div>
       <h2>Beschwerderecht bei der Aufsichtsbehörde</h2>
     </div>
-    <p>Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren (Art. 77 DSGVO):</p>
+    <p>Sie haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren (Art. 77 DSGVO). Für Bayern zuständig ist:</p>
     <ul>
-      <li><strong>Bundesbeauftragte(r) für den Datenschutz und die Informationsfreiheit (BfDI)</strong></li>
-      <li>Husarenstraße 30, 53117 Bonn</li>
-      <li><a href="https://www.bfdi.bund.de" target="_blank" rel="noopener">www.bfdi.bund.de</a></li>
-      <li><a href="mailto:poststelle@bfdi.bund.de">poststelle@bfdi.bund.de</a></li>
+      <li><strong>Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)</strong></li>
+      <li>Promenade 18, 91522 Ansbach</li>
+      <li><a href="https://www.lda.bayern.de" target="_blank" rel="noopener">www.lda.bayern.de</a></li>
+      <li><a href="mailto:poststelle@lda.bayern.de">poststelle@lda.bayern.de</a></li>
     </ul>
-    <p>In der Regel ist die Behörde des Bundeslandes zuständig, in dem Sie Ihren Wohnsitz haben.</p>
+    <p>Alternativ ist die Aufsichtsbehörde Ihres gewöhnlichen Aufenthalts zuständig.</p>
   </div>
 
-  <!-- 9. Sicherheit -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">9</div>
       <h2>Datensicherheit</h2>
     </div>
     <ul>
-      <li>Lokale Datenverschlüsselung durch iOS Data Protection (AES-256)</li>
+      <li>Lokale Datenverschlüsselung durch iOS Data Protection</li>
       <li>iCloud-Übertragungen TLS-verschlüsselt; CloudKit-Daten bei Apple at-rest verschlüsselt</li>
-      <li>Keine Übertragung sensibler Finanzdaten an externe Server durch den App-Betreiber</li>
-      <li>Zugangsdaten werden ausschließlich über das Apple-Konto-System verwaltet</li>
+      <li>Sensible Flags (z. B. Freischaltungsstatus) werden in der iOS Keychain gespeichert</li>
+      <li>Keine Übertragung von Finanzdaten an Server des Entwicklers – es existiert kein solcher Server</li>
     </ul>
   </div>
 
-  <!-- 10. Keine Analytik -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">10</div>
       <h2>Keine Analytik &amp; keine Werbung</h2>
     </div>
-    <div class="no-tracking">✅ Finovo enthält keine Analyse-SDKs, keine Werbetreibenden-Netzwerke und kein Cross-App-Tracking.</div>
-    <p>Es werden keine Gerätekennungen für Werbezwecke verwendet. Das App-Tracking-Transparenz-Framework (ATT) wird nicht benötigt.</p>
+    <div class="no-tracking">✅ Finovo enthält keine Analyse-SDKs, keine Werbenetzwerke und kein Cross-App-Tracking.</div>
+    <p>Es werden keine Gerätekennungen für Werbezwecke (IDFA) verwendet. Das App-Tracking-Transparenz-Framework (ATT) wird nicht benötigt. Es werden keine Nutzerdaten verkauft.</p>
   </div>
 
-  <!-- 11. Kinder -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">11</div>
-      <h2>Kinder und Minderjährige</h2>
+      <h2>Lokale Benachrichtigungen</h2>
     </div>
-    <p>Finovo richtet sich nicht an Kinder unter 16 Jahren. Wir erheben wissentlich keine personenbezogenen Daten von Kindern. Wenn Sie als Erziehungsberechtigter feststellen, dass Ihr Kind Daten eingegeben hat, wenden Sie sich bitte an <a href="mailto:lukas@lukeapp.de">lukas@lukeapp.de</a>.</p>
+    <p>Die App kann lokale Benachrichtigungen planen (Budget-Erinnerungen, wiederkehrende Buchungen). Diese werden lokal von iOS erzeugt und nicht über einen Server versendet. Push-Benachrichtigungen des Entwicklers werden nicht zu Werbezwecken genutzt. Deaktivierbar unter iOS-Einstellungen → Mitteilungen → Finovo.</p>
   </div>
 
-  <!-- 12. Änderungen -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">12</div>
+      <h2>Kinder und Minderjährige</h2>
+    </div>
+    <p>Finovo richtet sich an Personen ab <strong>16 Jahren</strong>. Wir erheben wissentlich keine personenbezogenen Daten von Kindern unter 16 Jahren. Erziehungsberechtigte können sich bei Fragen an <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a> wenden.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">13</div>
       <h2>Änderungen dieser Datenschutzerklärung</h2>
     </div>
     <p>Wir behalten uns vor, diese Datenschutzerklärung bei Änderungen der App oder der Rechtslage anzupassen. Die aktuelle Version ist stets unter dieser URL und in der App unter <em>Einstellungen → About → Datenschutzerklärung</em> abrufbar. Das Datum der letzten Änderung ist oben angegeben.</p>
   </div>
+
+</div>
+
+<!-- =================== ENGLISH =================== -->
+<div class="lang" data-lang="en">
+
+  <div class="hero">
+    <div class="badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      GDPR compliant
+    </div>
+    <h1>Privacy Policy</h1>
+    <p>This Privacy Policy explains how your personal data is handled when you use the Finovo iOS app.</p>
+    <div class="meta-row">
+      <div class="meta-item"><strong>App:</strong> Finovo (iOS)</div>
+      <div class="meta-item"><strong>Controller:</strong> Lukas Wittmann</div>
+      <div class="meta-item"><strong>Contact:</strong> <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a></div>
+      <div class="meta-item"><strong>Effective:</strong> 18 April 2026 · Version 2.0</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="icon">🔒</div>
+    <div><strong>In short:</strong> Finovo does not operate any servers. All data is stored locally on your device and — if you use iCloud — synchronised to <em>your own</em> iCloud account via Apple CloudKit. No advertising SDKs, no analytics, no data sales.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">0</div>
+      <h2>Controller</h2>
+    </div>
+    <p>The controller within the meaning of Art. 4 (7) GDPR is:</p>
+    <p>
+      Lukas Wittmann – Sole proprietor (Einzelunternehmer)<br>
+      Erlenstraße 10A<br>
+      91074 Herzogenaurach, Germany<br>
+      Email: <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>What data is processed?</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Data category</th>
+            <th>Examples</th>
+            <th>Storage</th>
+            <th>Legal basis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Identification data</strong></td><td>First name, optional partner name</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Profile photo</strong></td><td>Optional photo</td><td>Local / iCloud¹</td><td>Art. 6 (1) (a) GDPR</td></tr>
+          <tr><td><strong>Income data</strong></td><td>Monthly/annual net income</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Financial transactions</strong></td><td>Amount, category, date, note</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Budgets &amp; categories</strong></td><td>Name, budget limit</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Savings goals</strong></td><td>Goal name, amount, deadline</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>App preferences</strong></td><td>Language, onboarding state, filters</td><td>Local (UserDefaults)</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Subscription status</strong></td><td>Active plan, expiry date</td><td>Apple / local</td><td>Art. 6 (1) (b) GDPR</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px; color: var(--muted);">¹ iCloud synchronisation only happens if you are signed in to iCloud and have enabled iCloud for Finovo. Can be disabled in iOS Settings at any time.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Purposes of processing</h2>
+    </div>
+    <p>Finovo processes your data solely for the following purposes:</p>
+    <ul>
+      <li>Providing core app functionality (transactions, budgets, savings goals)</li>
+      <li>Calculating proportional expense sharing based on income data</li>
+      <li>Cross-device synchronisation via iCloud/CloudKit</li>
+      <li>Sharing household data with a partner via CloudKit Sharing (Partner Mode only)</li>
+      <li>Processing in-app purchases (Partner Mode subscription, handled by Apple)</li>
+    </ul>
+    <p>There is <strong>no</strong> processing for advertising purposes, no profiling, and no automated decision-making within the meaning of Art. 22 GDPR.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Legal bases</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Basis</th><th>Use case</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Art. 6 (1) (a)</strong> – Consent</td><td>Optional profile photo, optional notifications, optional partner sharing</td></tr>
+          <tr><td><strong>Art. 6 (1) (b)</strong> – Performance of contract</td><td>All data required to operate the app (transactions, income, budgets, subscription)</td></tr>
+          <tr><td><strong>Art. 6 (1) (f)</strong> – Legitimate interests</td><td>Providing a functioning, secure app; system-level diagnostics by Apple</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>Storage &amp; deletion</h2>
+    </div>
+    <h3>4.1 Local storage</h3>
+    <p>All data is primarily stored on your iOS device (SwiftData, UserDefaults, Keychain for sensitive flags). Uninstalling the App removes all local data. The App additionally provides a "Reset data" option in Settings.</p>
+    <h3>4.2 iCloud storage (CloudKit)</h3>
+    <p>If you use iCloud, your data is stored via Apple CloudKit in <em>your own</em> private iCloud database. The developer has no access to this data. iCloud data can be removed via <em>Settings → [your name] → iCloud → Manage Storage → Finovo</em>.</p>
+    <h3>4.3 Deletion markers (tombstones)</h3>
+    <p>When you delete a record, a tombstone is briefly retained so the deletion propagates to your other devices, after which it is automatically compacted away.</p>
+    <h3>4.4 Retention</h3>
+    <p>Data is retained for the entire duration of use and deleted on request without delay. There are no statutory retention obligations for the household data stored in the App.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>Sharing with third parties</h2>
+    </div>
+    <p>Finovo does not share your data with third parties and contains no advertising or analytics SDKs. Only Apple services are technically involved:</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Recipient</th><th>Purpose</th><th>Basis</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Apple Inc. – iCloud / CloudKit</strong></td>
+            <td>Cross-device sync, partner sharing</td>
+            <td>Data processor; EU-US Data Privacy Framework; <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy</a></td>
+          </tr>
+          <tr>
+            <td><strong>Apple Inc. – App Store / StoreKit</strong></td>
+            <td>Subscription management, payment processing</td>
+            <td>Apple acts as independent controller for payment processing</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Apple Inc. is based in the USA. Transfers to the USA rely on Apple's participation in the EU-US Data Privacy Framework and on Standard Contractual Clauses.</p>
+    <p>Payment details (Apple ID, payment method) never reach the developer. Apple provides only aggregated, non-personally-identifiable sales reports.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>Sharing data with a partner</h2>
+    </div>
+    <p>When you enable Partner Mode and create a share, selected household data is shared via Apple CloudKit Sharing (CKShare) with the iCloud account of the invited person. The following applies:</p>
+    <ul>
+      <li>You have full control over whether and with whom you share. Sharing is initiated actively via iOS system dialogs.</li>
+      <li>You can revoke the share at any time; further synchronisation of shared content then ends.</li>
+      <li>Data transmission is TLS-encrypted and takes place exclusively through Apple's iCloud infrastructure.</li>
+      <li>Income data is <strong>not</strong> shared automatically — it is used only locally to calculate split ratios.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2>Your rights as a data subject</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Right</th><th>Article</th><th>How to exercise it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="right-label">Access</td><td><span class="article-badge">Art. 15</span></td><td>All data is visible directly within the App. On request we provide information in writing.</td></tr>
+          <tr><td class="right-label">Rectification</td><td><span class="article-badge">Art. 16</span></td><td>Incorrect data can be edited directly in the App at any time.</td></tr>
+          <tr><td class="right-label">Erasure</td><td><span class="article-badge">Art. 17</span></td><td>Settings → Reset data, or uninstall the App.</td></tr>
+          <tr><td class="right-label">Restriction</td><td><span class="article-badge">Art. 18</span></td><td>iCloud sync can be disabled in iOS Settings.</td></tr>
+          <tr><td class="right-label">Data portability</td><td><span class="article-badge">Art. 20</span></td><td>Settings → Export (CSV) — all data in machine-readable format.</td></tr>
+          <tr><td class="right-label">Withdrawal of consent</td><td><span class="article-badge">Art. 7 (3)</span></td><td>Profile photo, notifications and shares can be disabled at any time.</td></tr>
+          <tr><td class="right-label">Objection</td><td><span class="article-badge">Art. 21</span></td><td>For processing based on Art. 6 (1) (f): write to <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Requests are answered within 30 days: <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a></p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2>Right to lodge a complaint</h2>
+    </div>
+    <p>You have the right to lodge a complaint with a data-protection supervisory authority (Art. 77 GDPR). The authority responsible for the controller's place of business (Bavaria, Germany) is:</p>
+    <ul>
+      <li><strong>Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)</strong></li>
+      <li>Promenade 18, 91522 Ansbach, Germany</li>
+      <li><a href="https://www.lda.bayern.de" target="_blank" rel="noopener">www.lda.bayern.de</a></li>
+      <li><a href="mailto:poststelle@lda.bayern.de">poststelle@lda.bayern.de</a></li>
+    </ul>
+    <p>Alternatively, the supervisory authority of your habitual residence has jurisdiction.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <h2>Data security</h2>
+    </div>
+    <ul>
+      <li>Local encryption via iOS Data Protection</li>
+      <li>iCloud transfers TLS-encrypted; CloudKit data encrypted at rest by Apple</li>
+      <li>Sensitive flags (e.g. entitlement unlock state) stored in the iOS Keychain</li>
+      <li>No transfer of financial data to developer-operated servers — no such server exists</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <h2>No analytics &amp; no advertising</h2>
+    </div>
+    <div class="no-tracking">✅ Finovo contains no analytics SDKs, no advertising networks, and no cross-app tracking.</div>
+    <p>No advertising device identifiers (IDFA) are used. The App Tracking Transparency (ATT) framework is not required. No user data is sold.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <h2>Local notifications</h2>
+    </div>
+    <p>The App can schedule local notifications (budget reminders, recurring transaction reminders). These are generated locally by iOS and are not sent via a server. Push notifications from the developer are not used for marketing purposes. Can be disabled under iOS Settings → Notifications → Finovo.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">12</div>
+      <h2>Children and minors</h2>
+    </div>
+    <p>Finovo is intended for users aged <strong>16 and older</strong>. We do not knowingly collect personal data from children under 16. Parents or guardians with questions may contact <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">13</div>
+      <h2>Changes to this Privacy Policy</h2>
+    </div>
+    <p>We reserve the right to adjust this Privacy Policy in the event of changes to the App or applicable law. The current version is always available at this URL and within the App under <em>Settings → About → Privacy Policy</em>. The date of the last change is shown at the top.</p>
+  </div>
+
+</div>
 
 </main>
 
@@ -486,11 +733,49 @@
   <hr class="footer-divider">
   <p>
     <strong>Finovo</strong> · Lukas Wittmann ·
-    <a href="mailto:lukas@lukeapp.de">lukas@lukeapp.de</a> ·
-    <a href="../impressum/">Impressum</a>
+    <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a> ·
+    <a href="../impressum/">Impressum</a> ·
+    <a href="../terms/">Terms</a>
   </p>
-  <p style="margin-top:6px;">Stand: März 2026 · Version 1.0</p>
+  <p style="margin-top:6px;" id="footer-stand">Stand: 18. April 2026 · Version 2.0</p>
 </footer>
+
+<script>
+(function () {
+  var HEADER_SUB = { de: "Datenschutzerklärung", en: "Privacy Policy" };
+  var FOOTER_STAND = {
+    de: "Stand: 18. April 2026 · Version 2.0",
+    en: "Effective: 18 April 2026 · Version 2.0"
+  };
+  var DOC_TITLE = {
+    de: "Datenschutzerklärung – Finovo",
+    en: "Privacy Policy – Finovo"
+  };
+  var buttons = document.querySelectorAll(".lang-switch button");
+  var sections = document.querySelectorAll(".lang");
+  function setLang(lang) {
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false"); });
+    sections.forEach(function (s) { s.classList.toggle("active", s.dataset.lang === lang); });
+    document.documentElement.setAttribute("lang", lang);
+    var sub = document.getElementById("header-sub");
+    if (sub) sub.textContent = HEADER_SUB[lang] || HEADER_SUB.de;
+    var stand = document.getElementById("footer-stand");
+    if (stand) stand.textContent = FOOTER_STAND[lang] || FOOTER_STAND.de;
+    document.title = DOC_TITLE[lang] || DOC_TITLE.de;
+    try { localStorage.setItem("finovoLang", lang); } catch (e) {}
+    if (location.hash !== "#" + lang) history.replaceState(null, "", "#" + lang);
+  }
+  buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+  var initial = (location.hash || "").replace("#", "");
+  if (initial !== "en" && initial !== "de") {
+    try { initial = localStorage.getItem("finovoLang"); } catch (e) {}
+    if (initial !== "en" && initial !== "de") {
+      initial = (navigator.language || "de").toLowerCase().indexOf("de") === 0 ? "de" : "en";
+    }
+  }
+  setLang(initial);
+})();
+</script>
 
 </body>
 </html>
