@@ -299,6 +299,9 @@
 
     .lang { display: none; }
     .lang.active { display: block; }
+    .en-only { display: none; }
+    html[lang="en"] .de-only { display: none; }
+    html[lang="en"] .en-only { display: inline; }
 
     @media (max-width: 768px) {
       nav { padding: 0 20px; gap: 10px; }
@@ -895,9 +898,9 @@
   <div class="footer-logo">Fin<span>OVO</span></div>
   <ul class="footer-links">
     <li><a href="../support/">Support</a></li>
-    <li><a href="../terms/">Terms</a></li>
-    <li><a href="../impressum/">Impressum</a></li>
-    <li><a href="mailto:lukas@lukinet.de">Kontakt</a></li>
+    <li><a href="../terms/"><span class="de-only">Nutzungsbedingungen</span><span class="en-only">Terms</span></a></li>
+    <li><a href="../impressum/"><span class="de-only">Impressum</span><span class="en-only">Legal Notice</span></a></li>
+    <li><a href="mailto:lukas@lukinet.de"><span class="de-only">Kontakt</span><span class="en-only">Contact</span></a></li>
   </ul>
   <div class="footer-copy">© 2026 Lukas Wittmann</div>
 </footer>
