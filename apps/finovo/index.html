@@ -1,398 +1,1728 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finovo – Haushaltsbudget leicht gemacht</title>
-  <meta name="description" content="Finovo ist die smarte Haushalts-App für iOS. Budgets verwalten, Ausgaben tracken, gemeinsam planen.">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finovo – Haushaltsbudget leicht gemacht</title>
+<link rel="icon" type="image/png" href="assets/appicon.png">
+<link rel="apple-touch-icon" href="assets/appicon.png">
+<meta name="description" content="Finovo – die smarte iOS-App für Haushaltsbudget, Ausgaben-Tracking und gemeinsame Finanzplanung. 100 % privat, DSGVO-konform, made in Germany.">
+<link rel="canonical" href="https://lukeapp.de/apps/finovo/">
+<meta name="theme-color" content="#22C55E" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0F14" media="(prefers-color-scheme: dark)">
 
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Finovo – Haushaltsbudget leicht gemacht">
+<meta property="og:description" content="Die smarte iOS-App für Haushalt, Budget und gemeinsame Finanzen. 100 % lokal, DSGVO-konform, made in Germany.">
+<meta property="og:url" content="https://lukeapp.de/apps/finovo/">
+<meta property="og:site_name" content="Finovo">
+<meta property="og:image" content="https://lukeapp.de/apps/finovo/assets/appicon.png">
+<meta property="og:locale" content="de_DE">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Finovo – Haushaltsbudget leicht gemacht">
+<meta name="twitter:description" content="Die smarte iOS-App für Haushalt, Budget und gemeinsame Finanzen. 100 % lokal, DSGVO-konform.">
+<meta name="twitter:image" content="https://lukeapp.de/apps/finovo/assets/appicon.png">
+
+<!-- JSON-LD: SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Finovo",
+  "operatingSystem": "iOS 17+",
+  "applicationCategory": "FinanceApplication",
+  "offers": [
+    {"@type": "Offer", "price": "0", "priceCurrency": "EUR", "name": "Single Mode"},
+    {"@type": "Offer", "price": "0.99", "priceCurrency": "EUR", "name": "Partner Mode (Monat)"},
+    {"@type": "Offer", "price": "9.99", "priceCurrency": "EUR", "name": "Partner Mode (Jahr)"}
+  ],
+  "author": {"@type": "Person", "name": "Lukas Wittmann"},
+  "inLanguage": ["de", "en"],
+  "url": "https://lukeapp.de/apps/finovo/",
+  "description": "Finovo – die smarte iOS-App für Haushaltsbudget, Ausgaben-Tracking und gemeinsame Finanzplanung."
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #22C55E;
+    --green-dark: #16A34A;
+    --green-light: #DCFCE7;
+    --navy: #0F172A;
+    --bg: #F2F2F7;
+    --white: #FFFFFF;
+    --gray: #8E8E93;
+    --border: #E5E5EA;
+    --text: #1C1C1E;
+    --text2: #3C3C43;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F2F2F7;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: rgba(242,242,247,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 40px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    padding: 80px 40px 60px;
+    text-align: center;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .hero-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin: 0 auto 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+
+  .hero-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 .green { color: var(--green); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--gray);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto 32px;
+    font-weight: 400;
+  }
+
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text2);
+    font-weight: 500;
+  }
+
+  .hero-badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .appstore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #1C1C1E;
+    color: #FFFFFF;
+    border-radius: 14px;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: opacity 0.15s;
+  }
+  .appstore-btn svg { fill: #FFFFFF; }
+  .appstore-btn .appstore-sub .small { color: rgba(255,255,255,0.8); }
+  .appstore-btn .appstore-sub .big   { color: #FFFFFF; }
+  .appstore-btn:hover { opacity: 0.85; }
+
+  /* ── SCREENSHOTS SECTION ── */
+  .screenshots-section {
+    padding: 60px 40px;
+    background: var(--bg);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--gray);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Phone frames with real screenshots */
+  .phones-showcase {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .phone-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .phone-item.featured {
+    transform: none;
+  }
+
+  .phone-frame {
+    background: #1C1C1E;
+    border-radius: 40px;
+    padding: 11px 9px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative;
+    width: 190px;
+  }
+
+  .phone-frame.large {
+    width: 220px;
+    border-radius: 46px;
+    padding: 13px 11px;
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 22px;
+    background: #1C1C1E;
+    border-radius: 0 0 12px 12px;
+    z-index: 10;
+  }
+
+  .phone-frame.large .phone-notch {
+    width: 84px;
+    height: 25px;
+    top: 13px;
+    border-radius: 0 0 14px 14px;
+  }
+
+  .phone-screen {
+    border-radius: 30px;
+    overflow: hidden;
+    background: #F2F2F7;
+    position: relative;
+  }
+
+  .phone-frame.large .phone-screen {
+    border-radius: 35px;
+  }
+
+  .phone-screen img {
+    width: 100%;
+    display: block;
+  }
+
+  .phone-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    text-align: center;
+  }
+
+  .phone-label-sub {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  /* placeholder phone */
+  .placeholder-screen {
+    background: #F2F2F7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    aspect-ratio: 9/19.5;
+  }
+
+  .placeholder-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(34,197,94,0.12);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .placeholder-text {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: center;
+    line-height: 1.5;
+    padding: 0 20px;
+  }
+
+  .placeholder-text strong {
+    display: block;
+    color: var(--text2);
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+
+  /* ── FEATURES ── */
+  .features-section {
+    padding: 60px 40px;
+    background: var(--white);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .feature-card {
+    background: var(--bg);
+    border-radius: 18px;
+    padding: 24px;
+    border: 0.5px solid var(--border);
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--green-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-size: 20px;
+  }
+
+  .feature-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* ── PRIVACY ── */
+  .privacy-section {
+    background: var(--navy);
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .privacy-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.8px;
+    margin-bottom: 12px;
+  }
+
+  .privacy-section p {
+    font-size: 16px;
+    color: #8E8E93;
+    max-width: 480px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+  }
+
+  .privacy-pills {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .privacy-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+  }
+
+  .privacy-pill .pill-icon { color: var(--green); font-size: 16px; }
+
+  /* ── PRICING ── */
+  .pricing-section {
+    padding: 60px 40px;
+    background: var(--bg);
+  }
+
+  .pricing-cards {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .pricing-card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 22px;
+    padding: 32px;
+    width: 300px;
+    flex-shrink: 0;
+  }
+
+  .pricing-card.featured {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .plan-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .pricing-card.featured .plan-name { color: white; }
+
+  .plan-price {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pricing-card.featured .plan-price { color: white; }
+
+  .plan-period {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--gray);
+  }
+  .pricing-card.featured .plan-period { color: rgba(255,255,255,0.7); }
+
+  .plan-desc {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid var(--border);
+    line-height: 1.5;
+  }
+  .pricing-card.featured .plan-desc {
+    color: rgba(255,255,255,0.7);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.4;
+  }
+  .pricing-card.featured .plan-features li { color: rgba(255,255,255,0.9); }
+
+  .check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--green-light);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .pricing-card.featured .check {
+    background: rgba(255,255,255,0.25);
+  }
+
+  .check svg {
+    width: 10px;
+    height: 10px;
+    stroke: var(--green);
+    stroke-width: 2.5;
+    fill: none;
+  }
+  .pricing-card.featured .check svg { stroke: white; }
+
+  .plan-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--white);
+    border-top: 0.5px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .footer-logo span { color: var(--green); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--gray);
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .hero { padding: 60px 20px 40px; }
+    .hero h1 { font-size: 36px; }
+    .screenshots-section, .features-section, .privacy-section, .pricing-section { padding: 48px 20px; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .phones-showcase { gap: 12px; }
+    .phone-frame { width: 145px; border-radius: 30px; padding: 9px 7px; }
+    .phone-frame .phone-notch { width: 56px; height: 17px; top: 9px; border-radius: 0 0 9px 9px; }
+    .phone-frame .phone-screen { border-radius: 23px; }
+    footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /*                    ENHANCED STYLES                   */
+  /* ═══════════════════════════════════════════════════ */
+
+  /* Brand logo img in nav / footer */
+  .nav-logo-img, .footer-logo-img {
+    height: 26px; width: auto; display: block;
+  }
+  .footer-logo-img { height: 24px; }
+
+  /* NAV CTA refresh: Apple-style pill with icon */
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 16px 8px 14px;
+    background: linear-gradient(135deg, #22C55E, #16A34A);
+    box-shadow: 0 4px 14px rgba(34,197,94,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .nav-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(34,197,94,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .nav-cta svg { width: 14px; height: 14px; fill: white; }
+
+  /* HERO: mesh gradient aura + glowing icon */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: -30% -10% auto -10%;
+    height: 130%;
+    background:
+      radial-gradient(60% 50% at 15% 25%, rgba(34,197,94,0.18) 0%, rgba(34,197,94,0) 60%),
+      radial-gradient(50% 45% at 85% 20%, rgba(22,163,74,0.14) 0%, rgba(22,163,74,0) 60%),
+      radial-gradient(45% 40% at 50% 100%, rgba(220,252,231,0.7) 0%, rgba(220,252,231,0) 70%);
+    z-index: 0; pointer-events: none;
+    filter: blur(2px);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 40px;
+    width: 240px; height: 240px;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(34,197,94,0.35), rgba(34,197,94,0));
+    z-index: 0; pointer-events: none;
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); }
+    50%      { opacity: 0.85; transform: translateX(-50%) scale(1.08); }
+  }
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-wordmark {
+    font-size: 96px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    color: var(--text);
+    text-align: center;
+    margin: 0 auto 20px;
+    line-height: 1;
+    animation: floaty 5s ease-in-out infinite;
+  }
+  .hero-wordmark span {
+    background: linear-gradient(135deg, #22C55E 0%, #16A34A 60%, #15803D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  @media (max-width: 768px) {
+    .hero-wordmark { font-size: 64px; letter-spacing: -2px; }
+  }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  /* Gradient headline */
+  .hero h1 .green {
+    background: linear-gradient(135deg, #22C55E 0%, #16A34A 60%, #15803D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Trust strip: Built for Apple */
+  .trust-strip {
+    background: var(--white);
+    padding: 28px 40px 48px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .trust-strip .trust-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 22px;
+  }
+  .trust-logos {
+    display: flex; justify-content: center; align-items: center;
+    gap: 40px; flex-wrap: wrap;
+    max-width: 960px; margin: 0 auto;
+  }
+  .trust-logo {
+    display: inline-flex; align-items: center; gap: 9px;
+    color: #6e6e73;
+    font-size: 14px; font-weight: 600;
+    letter-spacing: -0.2px;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .trust-logo:hover { color: var(--text); transform: translateY(-1px); }
+  .trust-logo svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .trust-logo.swift svg   { color: #F05138; }
+  .trust-logo.icloud svg  { color: #3B82F6; }
+  .trust-logo.cloudkit svg{ color: #0EA5E9; }
+  .trust-logo.storekit svg{ color: #A855F7; }
+  .trust-logo.swiftdata svg { color: #6366F1; }
+  .trust-logo.dsgvo svg   { color: #22C55E; }
+  .trust-logo.apple svg   { color: var(--text); }
+
+  /* Feature card upgrades */
+  .feature-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+    border-color: rgba(34,197,94,0.35);
+  }
+  .feature-icon {
+    background: linear-gradient(135deg, rgba(34,197,94,0.18), rgba(22,163,74,0.1));
+    box-shadow: inset 0 0 0 1px rgba(34,197,94,0.2);
+  }
+
+  /* Privacy section glow */
+  .privacy-section {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(60% 80% at 50% 0%, rgba(34,197,94,0.18) 0%, rgba(34,197,94,0) 60%),
+      var(--navy);
+  }
+  .privacy-section::before {
+    content: '';
+    position: absolute; inset: auto 0 -40% 0; height: 70%;
+    background: radial-gradient(50% 60% at 50% 100%, rgba(34,197,94,0.16), rgba(34,197,94,0) 70%);
+    pointer-events: none;
+  }
+  .privacy-section h2, .privacy-section p, .privacy-pills { position: relative; z-index: 1; }
+  .privacy-pill {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .privacy-pill:hover {
+    background: rgba(255,255,255,0.14);
+    transform: translateY(-1px);
+  }
+
+  /* Pricing: floating "Popular" badge + gradient featured card */
+  .pricing-card {
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  }
+  .pricing-card.featured {
+    background: linear-gradient(155deg, #22C55E 0%, #16A34A 100%);
+    box-shadow: 0 24px 60px rgba(34,197,94,0.35);
+  }
+  .pricing-card.featured::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(80% 60% at 100% 0%, rgba(255,255,255,0.22), rgba(255,255,255,0) 60%),
+      radial-gradient(70% 60% at 0% 100%, rgba(21,128,61,0.35), rgba(21,128,61,0) 60%);
+    pointer-events: none;
+  }
+  .pricing-card.featured > * { position: relative; z-index: 1; }
+
+  .popular-badge {
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    color: var(--green-dark);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    display: inline-flex; align-items: center; gap: 6px;
+    z-index: 3;
+  }
+  .popular-badge::before {
+    content: '★';
+    color: var(--green);
+    font-size: 12px;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 900px;
+    margin: 40px auto 0;
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 22px;
+    overflow: hidden;
+  }
+  .stat {
+    padding: 22px 16px;
+    text-align: center;
+    border-right: 0.5px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-value {
+    font-size: 22px; font-weight: 800;
+    color: var(--text); letter-spacing: -0.5px;
+  }
+  .stat-value .green {
+    background: linear-gradient(135deg, #22C55E, #16A34A);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label {
+    font-size: 12px; color: var(--gray);
+    margin-top: 4px; font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  /* Section label with gradient underline */
+  .section-label {
+    background: linear-gradient(135deg, #22C55E, #16A34A);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* App store button Apple-style polish */
+  .appstore-btn {
+    background: linear-gradient(180deg, #1C1C1E 0%, #000 100%);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+    padding: 14px 26px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .appstore-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+    opacity: 1;
+  }
+  .appstore-sub {
+    display: flex; flex-direction: column; align-items: flex-start;
+    line-height: 1.15;
+  }
+  .appstore-sub .small { font-size: 10px; font-weight: 400; opacity: 0.8; letter-spacing: 0.2px; }
+  .appstore-sub .big   { font-size: 16px; font-weight: 600; letter-spacing: -0.2px; }
+
+  @media (max-width: 768px) {
+    .trust-logos { gap: 20px 28px; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 0.5px solid var(--border); }
+    .trust-strip { padding: 24px 20px 36px; }
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /*        HERO EYEBROW + SCROLL REVEAL + MISC          */
+  /* ═══════════════════════════════════════════════════ */
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    border-radius: 100px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.5);
+    animation: ping 2s ease-out infinite;
+  }
+  @keyframes ping {
+    0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  }
+
+  /* Scroll-reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-wordmark, .hero::after, .hero-eyebrow .dot { animation: none !important; }
+  }
+
+  /* Staggered phone layout */
+  @media (min-width: 900px) {
+    .phones-showcase {
+      align-items: center;
+      gap: 18px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 20px 20px 20px;
+      scrollbar-width: none;
+    }
+    .phones-showcase::-webkit-scrollbar { display: none; }
+    .phone-item        { transform: translateY(18px); }
+    .phone-item:nth-child(odd)  { transform: translateY(0); }
+    .phone-item.featured {
+      transform: translateY(-12px) scale(1.04);
+      z-index: 2;
+    }
+    .phone-item.featured .phone-frame {
+      box-shadow: 0 32px 80px rgba(34,197,94,0.28), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+  }
+
+  /* Partner Mode mock screen (replaces "Screenshot folgt") */
+  .partner-mock {
+    aspect-ratio: 9/19.5;
+    background: linear-gradient(180deg, #DCFCE7 0%, #FFFFFF 50%, #F2F2F7 100%);
+    display: flex; flex-direction: column;
+    padding: 28px 14px 14px;
+    gap: 10px;
+  }
+  .partner-mock .pm-head {
+    font-size: 10px; font-weight: 700; color: var(--green-dark);
+    letter-spacing: 0.8px; text-transform: uppercase;
+    text-align: center; margin-bottom: 2px;
+  }
+  .partner-mock .pm-title {
+    font-size: 14px; font-weight: 700; color: var(--text);
+    text-align: center; line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .partner-mock .pm-avatars {
+    display: flex; justify-content: center; gap: -8px; margin-bottom: 6px;
+  }
+  .partner-mock .pm-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #22C55E, #16A34A);
+    color: white; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid white;
+    margin-left: -6px;
+  }
+  .partner-mock .pm-avatar:first-child { margin-left: 0; background: linear-gradient(135deg, #A855F7, #6366F1); }
+  .partner-mock .pm-bar {
+    background: white; border-radius: 10px;
+    padding: 8px 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 10px;
+  }
+  .partner-mock .pm-bar .pm-name { font-weight: 600; color: var(--text); }
+  .partner-mock .pm-bar .pm-amt  { color: var(--green-dark); font-weight: 700; }
+  .partner-mock .pm-progress {
+    margin-top: 6px;
+    height: 4px; background: rgba(0,0,0,0.06);
+    border-radius: 3px; overflow: hidden;
+  }
+  .partner-mock .pm-progress span {
+    display: block; height: 100%;
+    background: linear-gradient(90deg, #22C55E, #16A34A);
+  }
+
+  /* Comparison Table */
+  .compare-section {
+    padding: 60px 40px;
+    background: var(--white);
+  }
+  .compare-table {
+    max-width: 780px; margin: 40px auto 0;
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 22px;
+    overflow: hidden;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 14px;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row.head {
+    background: var(--bg);
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--gray);
+  }
+  .compare-row.head .col-us { color: var(--green-dark); }
+  .compare-row .col-feat { color: var(--text); font-weight: 500; }
+  .compare-row .col-us,
+  .compare-row .col-them { text-align: center; }
+  .compare-check { color: var(--green); font-size: 18px; font-weight: 700; }
+  .compare-cross { color: #C7C7CC; font-size: 16px; }
+  .compare-text { font-size: 12px; color: var(--gray); }
+
+  /* FAQ Teaser */
+  .faq-section {
+    padding: 60px 40px;
+    background: var(--bg);
+  }
+  .faq-list {
+    max-width: 720px;
+    margin: 40px auto 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .faq-item {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+  .faq-item[open] { border-color: rgba(34,197,94,0.5); }
+  .faq-item summary {
+    list-style: none;
+    padding: 16px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    font-size: 22px; font-weight: 400;
+    color: var(--green);
+    transition: transform 0.2s ease;
+    line-height: 1;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-body {
+    padding: 0 20px 16px;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .faq-footer {
+    text-align: center; margin-top: 24px;
+    font-size: 14px; color: var(--gray);
+  }
+  .faq-footer a {
+    color: var(--green-dark); text-decoration: none; font-weight: 600;
+  }
+  .faq-footer a:hover { text-decoration: underline; }
+
+  /* Sticky mobile CTA */
+  .sticky-cta {
+    display: none;
+    position: fixed; left: 16px; right: 16px; bottom: 16px;
+    z-index: 90;
+    background: linear-gradient(135deg, #22C55E, #16A34A);
+    color: white;
+    border-radius: 16px;
+    padding: 14px 20px;
+    text-align: center;
+    font-weight: 700; font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(34,197,94,0.4), 0 0 0 1px rgba(255,255,255,0.15) inset;
+    transform: translateY(120%);
+    transition: transform 0.3s ease;
+    align-items: center; justify-content: center; gap: 8px;
+  }
+  .sticky-cta.show { transform: translateY(0); }
+  .sticky-cta svg { width: 16px; height: 16px; fill: white; }
+  @media (max-width: 768px) {
+    .sticky-cta { display: inline-flex; }
+  }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: inline-flex;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: 100px;
+    padding: 2px;
+    margin-right: 12px;
+  }
+  .lang-toggle button {
+    background: transparent; border: none;
+    padding: 4px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.4px;
+    color: var(--gray); cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .lang-toggle button.active {
+    background: var(--white);
+    color: var(--text);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
     :root {
-      --primary:       #1A5CFF;
-      --primary-dark:  #1245CC;
-      --primary-light: #EEF3FF;
-      --text:          #1A1A2E;
-      --muted:         #666680;
-      --border:        #E0E4F0;
-      --bg:            #F8F9FF;
-      --white:         #FFFFFF;
-      --radius:        14px;
+      --bg:     #0B0F14;
+      --white:  #12171E;
+      --text:   #F5F5F7;
+      --text2:  #E5E5EA;
+      --gray:   #98989F;
+      --border: rgba(255,255,255,0.1);
+      --navy:   #000;
+      --green-light: rgba(34,197,94,0.15);
     }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* ── Nav ── */
-    nav {
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100;
-    }
-    .nav-inner {
-      max-width: 900px; margin: 0 auto;
-      padding: 12px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none;
-    }
-    .nav-icon {
-      width: 32px; height: 32px; border-radius: 8px;
-      background: var(--primary);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .nav-icon svg { width: 18px; height: 18px; fill: white; }
-    .nav-name { font-size: 16px; font-weight: 700; color: var(--text); }
-    .nav-links { display: flex; gap: 4px; }
-    .nav-links a {
-      font-size: 14px; font-weight: 500;
-      color: var(--muted); text-decoration: none;
-      padding: 6px 12px; border-radius: 8px;
-      transition: background 0.15s, color 0.15s;
-    }
-    .nav-links a:hover { background: var(--primary-light); color: var(--primary); }
-
-    /* ── Hero ── */
-    .hero-section {
-      background: linear-gradient(160deg, #1A5CFF 0%, #2563EB 50%, #1e40af 100%);
-      padding: 80px 24px 72px;
-      text-align: center;
-      color: white;
-    }
-    .hero-app-icon {
-      width: 96px; height: 96px; border-radius: 24px;
-      background: rgba(255,255,255,0.18);
-      border: 2px solid rgba(255,255,255,0.3);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 44px;
-    }
-    .hero-section h1 {
-      font-size: 42px; font-weight: 900;
-      letter-spacing: -0.8px; margin-bottom: 16px;
-    }
-    .hero-section h1 span { opacity: 0.75; }
-    .hero-section p {
-      font-size: 18px; opacity: 0.85;
-      max-width: 520px; margin: 0 auto 32px;
-    }
-    .hero-badges {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      justify-content: center; margin-bottom: 36px;
-    }
-    .hero-badge {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: white; font-size: 13px; font-weight: 600;
-      padding: 6px 14px; border-radius: 20px;
-    }
+    body { background: #0B0F14; }
+    nav { background: rgba(11,15,20,0.8); }
     .appstore-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: white; color: var(--primary);
-      font-size: 15px; font-weight: 700;
-      padding: 14px 28px; border-radius: 12px;
-      text-decoration: none;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      background: linear-gradient(180deg, #2A2A2C 0%, #1C1C1E 100%);
     }
-    .appstore-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,0,0,0.25); }
-    .appstore-btn svg { width: 22px; height: 22px; fill: var(--primary); }
+    .hero::before {
+      background:
+        radial-gradient(60% 50% at 15% 25%, rgba(34,197,94,0.22) 0%, rgba(34,197,94,0) 60%),
+        radial-gradient(50% 45% at 85% 20%, rgba(22,163,74,0.18) 0%, rgba(22,163,74,0) 60%),
+        radial-gradient(45% 40% at 50% 100%, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0) 70%);
+    }
+    .feature-card { background: #181E26; }
+    .feature-icon { background: linear-gradient(135deg, rgba(34,197,94,0.25), rgba(22,163,74,0.15)); }
+    .stats-strip, .compare-table, .faq-item, .pricing-card, .hero-badge {
+      background: #12171E;
+    }
+    .pricing-card.featured { background: linear-gradient(155deg, #22C55E 0%, #16A34A 100%); }
+    .trust-strip { background: #12171E; }
+    .compare-row.head { background: #0B0F14; }
+    .partner-mock {
+      background: linear-gradient(180deg, rgba(34,197,94,0.2) 0%, #12171E 50%, #0B0F14 100%);
+    }
+    .partner-mock .pm-title { color: var(--text); }
+    .partner-mock .pm-bar { background: #1C2229; }
+    .partner-mock .pm-bar .pm-name { color: var(--text); }
+    .phone-screen { background: #12171E; }
+    .placeholder-screen { background: #12171E; }
+    .placeholder-text strong { color: var(--text); }
+    .lang-toggle { background: #12171E; }
+    .lang-toggle button.active { background: #2A2A2C; color: var(--text); }
+    .trust-logo { color: #98989F; }
+    .trust-logo:hover { color: var(--text); }
+    .trust-logo.apple svg { color: var(--text); }
+    .privacy-section { background: #000; }
+    .faq-body { color: var(--text2); }
+  }
 
-    /* ── Main content ── */
-    main { max-width: 900px; margin: 0 auto; padding: 56px 24px 80px; }
+  /* i18n helpers */
+  .i18n-en { display: none; }
+  html[lang="en"] .i18n-de { display: none; }
+  html[lang="en"] .i18n-en { display: inline; }
+  html[lang="en"] .i18n-en.block { display: block; }
+  .i18n-de.block { display: block; }
+  html[lang="en"] .i18n-de.block { display: none; }
 
-    /* ── Page cards (the 3 links) ── */
-    .pages-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 56px;
-    }
-    .page-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      text-decoration: none;
-      color: var(--text);
-      display: flex; flex-direction: column;
-      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-    }
-    .page-card:hover {
-      border-color: var(--primary);
-      box-shadow: 0 4px 20px rgba(26,92,255,0.1);
-      transform: translateY(-2px);
-    }
-    .page-card-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: var(--primary-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
-    .page-card h2 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-    .page-card p  { font-size: 13px; color: var(--muted); flex: 1; }
-    .page-card-arrow {
-      margin-top: 16px;
-      font-size: 18px;
-      color: var(--primary);
-    }
-
-    /* ── Features ── */
-    .features-heading {
-      font-size: 24px; font-weight: 800;
-      letter-spacing: -0.3px;
-      margin-bottom: 20px;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 14px;
-      margin-bottom: 56px;
-    }
-    .feature-item {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 20px;
-      display: flex; gap: 14px; align-items: flex-start;
-    }
-    .feature-emoji { font-size: 26px; flex-shrink: 0; }
-    .feature-item h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .feature-item p  { font-size: 13px; color: var(--muted); }
-
-    /* ── Plan comparison ── */
-    .plans-heading {
-      font-size: 24px; font-weight: 800;
-      letter-spacing: -0.3px;
-      margin-bottom: 20px;
-    }
-    .plans-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 56px;
-    }
-    .plan-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-    }
-    .plan-card.featured {
-      border-color: var(--primary);
-      background: var(--primary-light);
-    }
-    .plan-badge {
-      display: inline-block;
-      font-size: 11px; font-weight: 700;
-      background: var(--primary); color: white;
-      padding: 3px 9px; border-radius: 6px;
-      margin-bottom: 10px;
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .plan-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-    .plan-price { font-size: 28px; font-weight: 900; color: var(--primary); margin-bottom: 16px; }
-    .plan-price span { font-size: 14px; font-weight: 500; color: var(--muted); }
-    .plan-features { list-style: none; }
-    .plan-features li {
-      font-size: 14px; padding: 6px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex; gap: 8px; align-items: center;
-    }
-    .plan-features li:last-child { border-bottom: none; }
-    .plan-features li::before { content: "✓"; color: var(--primary); font-weight: 700; flex-shrink: 0; }
-
-    /* ── Footer ── */
-    footer {
-      background: var(--text);
-      color: rgba(255,255,255,0.6);
-      padding: 40px 24px;
-      text-align: center;
-      font-size: 13px;
-    }
-    footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
-    footer a:hover { color: white; }
-    .footer-inner { max-width: 900px; margin: 0 auto; }
-    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 16px; }
-    .footer-copy { opacity: 0.5; }
-
-    @media (max-width: 640px) {
-      .hero-section h1 { font-size: 28px; }
-      .hero-section p  { font-size: 16px; }
-      .pages-grid { grid-template-columns: 1fr; }
-      .plans-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
-  </style>
+  @media (max-width: 768px) {
+    .compare-row { grid-template-columns: 1.4fr 0.8fr 0.8fr; padding: 14px 14px; font-size: 13px; }
+    .compare-section, .faq-section { padding: 48px 20px; }
+    main, footer { padding-bottom: 80px !important; }
+    footer { padding: 24px 20px 90px; }
+  }
+</style>
 </head>
 <body>
 
-<!-- Nav -->
+<!-- NAV -->
 <nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="">
-      <div class="nav-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-      </div>
-      <span class="nav-name">Finovo</span>
-    </a>
-    <div class="nav-links">
-      <a href="support/">Support</a>
-      <a href="privacy/">Datenschutz</a>
-      <a href="terms/">Nutzungsbedingungen</a>
-      <a href="impressum/">Impressum</a>
-    </div>
+  <a href="#" class="nav-logo" aria-label="Finovo">Fin<span>OVO</span></a>
+  <ul class="nav-links">
+    <li><a href="#screenshots"><span class="i18n-de">Die App</span><span class="i18n-en">The App</span></a></li>
+    <li><a href="#features"><span class="i18n-de">Funktionen</span><span class="i18n-en">Features</span></a></li>
+    <li><a href="#pricing"><span class="i18n-de">Preise</span><span class="i18n-en">Pricing</span></a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;">
+  <div class="lang-toggle" role="group" aria-label="Sprache">
+    <button type="button" data-lang="de" class="active">DE</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+  <a href="#" class="nav-cta" aria-label="Im App Store laden">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    <span class="i18n-de">Laden</span><span class="i18n-en">Get</span>
+  </a>
   </div>
 </nav>
 
-<!-- Hero -->
-<div class="hero-section">
-  <div class="hero-app-icon">💰</div>
-  <h1>Budget<span>Flow</span></h1>
-  <p>Die smarte Haushalts-App für iOS. Ausgaben tracken, Budgets planen, gemeinsam sparen.</p>
-  <div class="hero-badges">
-    <span class="hero-badge">📱 iOS</span>
-    <span class="hero-badge">🔒 Daten bleiben auf deinem Gerät</span>
-    <span class="hero-badge">☁️ iCloud Sync</span>
-    <span class="hero-badge">🆓 Kostenlos starten</span>
-  </div>
-  <!-- Replace href with your real App Store URL when available -->
-  <a class="appstore-btn" href="#" onclick="return false;">
-    <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-    Im App Store laden
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-wordmark" aria-label="Finovo">Fin<span>OVO</span></div>
+  <div class="hero-eyebrow"><span class="dot"></span><span class="i18n-de">Launching 2026 · iOS 17+</span><span class="i18n-en">Launching 2026 · iOS 17+</span></div>
+  <h1>
+    <span class="i18n-de">Finanzen im <span class="green">Griff.</span></span>
+    <span class="i18n-en">Finances <span class="green">in check.</span></span>
+  </h1>
+  <p class="hero-sub">
+    <span class="i18n-de">Die smarte Haushalts-App für iOS. Ausgaben tracken, Budgets planen, gemeinsam sparen – 100 % privat und DSGVO-konform.</span>
+    <span class="i18n-en">The smart household app for iOS. Track expenses, plan budgets, save together – 100 % private and GDPR-compliant.</span>
+  </p>
+
+  <a href="#" class="appstore-btn">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    <span class="appstore-sub">
+      <span class="small"><span class="i18n-de">Bald verfügbar im</span><span class="i18n-en">Coming soon on the</span></span>
+      <span class="big">App Store</span>
+    </span>
   </a>
+
+  <div class="stats-strip">
+    <div class="stat">
+      <div class="stat-value"><span class="green" data-count="100" data-suffix=" %">0 %</span></div>
+      <div class="stat-label"><span class="i18n-de">lokal gespeichert</span><span class="i18n-en">stored locally</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-value"><span class="green" data-count="0">0</span></div>
+      <div class="stat-label"><span class="i18n-de">Tracker & Werbung</span><span class="i18n-en">Trackers & Ads</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-value"><span class="i18n-de">DSGVO</span><span class="i18n-en">GDPR</span></div>
+      <div class="stat-label"><span class="i18n-de">konform · Art. 32</span><span class="i18n-en">compliant · Art. 32</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">🇩🇪</div>
+      <div class="stat-label"><span class="i18n-de">Made in Germany</span><span class="i18n-en">Made in Germany</span></div>
+    </div>
+  </div>
 </div>
 
-<main>
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-label"><span class="i18n-de">Gebaut für Apple Plattformen</span><span class="i18n-en">Built for Apple Platforms</span></div>
+  <div class="trust-logos">
+    <div class="trust-logo apple" title="Apple">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      Apple
+    </div>
+    <div class="trust-logo swift" title="Swift">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.9 17.3c-3-1.8-6.6-4.3-9.1-7.1 1.3 2.5 3.6 5.1 6 7-2.6-1-5.5-2.7-7.7-5 1.7 2.3 4 4.3 6.5 5.8-3.6.7-7.1-1.4-8.4-3.1C3.8 7.7 8.5 2.9 14.1 4.7c-.3.3-1 .9-1.3 1.3 3 2 4.9 5.1 5.4 8.3.5-1.1.7-2.6 0-5 1.6 1.9 2.6 4.5 2.5 7.2.2 0 .4-.3.7-.8.2.9.1 2-.5 2.9.2-.7.1-1.6-.3-2 .3 1.5-.4 3.4-1.7 3.9v-3.2z"/>
+      </svg>
+      Swift
+    </div>
+    <div class="trust-logo swiftdata" title="SwiftData">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+        <path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5"/>
+        <path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"/>
+      </svg>
+      SwiftData
+    </div>
+    <div class="trust-logo cloudkit" title="CloudKit">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17.5 19H7A5 5 0 017 9a7 7 0 0113.2 2.4A4.5 4.5 0 0117.5 19z"/>
+        <path d="M9 14l2 2 4-4"/>
+      </svg>
+      CloudKit
+    </div>
+    <div class="trust-logo icloud" title="iCloud">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.5 19H7A5 5 0 117 9a7 7 0 0113.2 2.4A4.5 4.5 0 0117.5 19z"/>
+      </svg>
+      iCloud
+    </div>
+    <div class="trust-logo storekit" title="StoreKit 2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      StoreKit 2
+    </div>
+    <div class="trust-logo dsgvo" title="DSGVO">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+      DSGVO
+    </div>
+  </div>
+</div>
 
-  <!-- 3 page links -->
-  <div class="pages-grid">
-    <a class="page-card" href="support/">
-      <div class="page-card-icon">💬</div>
-      <h2>Support</h2>
-      <p>Häufige Fragen, Anleitungen und direkte Kontaktmöglichkeit.</p>
-      <div class="page-card-arrow">→</div>
-    </a>
-    <a class="page-card" href="privacy/">
-      <div class="page-card-icon">🔒</div>
-      <h2>Datenschutzerklärung</h2>
-      <p>Wie Finovo deine Daten verarbeitet und schützt — DSGVO-konform.</p>
-      <div class="page-card-arrow">→</div>
-    </a>
-    <a class="page-card" href="terms/">
-      <div class="page-card-icon">📜</div>
-      <h2>Nutzungsbedingungen</h2>
-      <p>Bedingungen für die Nutzung der App und des Partner-Modus.</p>
-      <div class="page-card-arrow">→</div>
-    </a>
-    <a class="page-card" href="impressum/">
-      <div class="page-card-icon">📄</div>
-      <h2>Impressum</h2>
-      <p>Angaben gemäß § 5 TMG zum Anbieter der App.</p>
-      <div class="page-card-arrow">→</div>
-    </a>
+<!-- SCREENSHOTS -->
+<div class="screenshots-section" id="screenshots">
+  <div class="section-header reveal">
+    <div class="section-label"><span class="i18n-de">Die App</span><span class="i18n-en">The App</span></div>
+    <h2 class="section-title"><span class="i18n-de">So sieht Finovo aus.</span><span class="i18n-en">This is Finovo.</span></h2>
+    <p class="section-sub"><span class="i18n-de">Jeder Screen ist darauf ausgelegt, dir auf einen Blick alle Informationen zu liefern.</span><span class="i18n-en">Every screen is designed to surface the information you need at a glance.</span></p>
   </div>
 
-  <!-- Features -->
-  <div class="features-heading">Was Finovo bietet</div>
+  <div class="phones-showcase">
+
+    <!-- Dashboard (featured, center) -->
+    <div class="phone-item featured">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="assets/screens/dashboard.png" loading="lazy" decoding="async" alt="Dashboard">
+        </div>
+      </div>
+      <div class="phone-label">Dashboard</div>
+      <div class="phone-label-sub"><span class="i18n-de">Bilanz & Jahresprognose</span><span class="i18n-en">Balance & forecast</span></div>
+    </div>
+
+    <!-- Transactions -->
+    <div class="phone-item">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="assets/screens/transactions.png" loading="lazy" decoding="async" alt="Transaktionen">
+        </div>
+      </div>
+      <div class="phone-label"><span class="i18n-de">Transaktionen</span><span class="i18n-en">Transactions</span></div>
+      <div class="phone-label-sub"><span class="i18n-de">Alle Ausgaben im Blick</span><span class="i18n-en">Every expense at a glance</span></div>
+    </div>
+
+    <!-- Budgets -->
+    <div class="phone-item">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="assets/screens/budgets.png" loading="lazy" decoding="async" alt="Budgets">
+        </div>
+      </div>
+      <div class="phone-label">Budgets</div>
+      <div class="phone-label-sub"><span class="i18n-de">Monatliche Limits setzen</span><span class="i18n-en">Monthly category limits</span></div>
+    </div>
+
+    <!-- Savings Goals -->
+    <div class="phone-item">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="assets/screens/sparziele.png" loading="lazy" decoding="async" alt="Sparziele">
+        </div>
+      </div>
+      <div class="phone-label"><span class="i18n-de">Sparziele</span><span class="i18n-en">Savings Goals</span></div>
+      <div class="phone-label-sub"><span class="i18n-de">Träume verfolgen</span><span class="i18n-en">Track your dreams</span></div>
+    </div>
+
+    <!-- New Transaction -->
+    <div class="phone-item">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="assets/screens/erfassen.png" loading="lazy" decoding="async" alt="Neue Transaktion">
+        </div>
+      </div>
+      <div class="phone-label"><span class="i18n-de">Erfassen</span><span class="i18n-en">Quick Entry</span></div>
+      <div class="phone-label-sub"><span class="i18n-de">Schnell & einfach</span><span class="i18n-en">Fast & simple</span></div>
+    </div>
+
+    <!-- Partner Mode Mock -->
+    <div class="phone-item">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="partner-mock">
+            <div class="pm-head"><span class="i18n-de">Partner Mode</span><span class="i18n-en">Partner Mode</span></div>
+            <div class="pm-avatars">
+              <div class="pm-avatar">L</div>
+              <div class="pm-avatar">S</div>
+            </div>
+            <div class="pm-title"><span class="i18n-de">Gemeinsamer Haushalt</span><span class="i18n-en">Shared Household</span></div>
+            <div class="pm-bar"><span class="pm-name">Lukas</span><span class="pm-amt">58 %</span></div>
+            <div class="pm-progress"><span style="width:58%"></span></div>
+            <div class="pm-bar"><span class="pm-name">Sophia</span><span class="pm-amt">42 %</span></div>
+            <div class="pm-progress"><span style="width:42%"></span></div>
+            <div class="pm-bar" style="margin-top:6px;"><span class="pm-name"><span class="i18n-de">Miete</span><span class="i18n-en">Rent</span></span><span class="pm-amt">1.200 €</span></div>
+            <div class="pm-bar"><span class="pm-name"><span class="i18n-de">Einkauf</span><span class="i18n-en">Groceries</span></span><span class="pm-amt">342 €</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Partner Mode</div>
+      <div class="phone-label-sub"><span class="i18n-de">Gemeinsam planen</span><span class="i18n-en">Plan together</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features-section" id="features">
+  <div class="section-header reveal">
+    <div class="section-label"><span class="i18n-de">Funktionen</span><span class="i18n-en">Features</span></div>
+    <h2 class="section-title"><span class="i18n-de">Alles was du brauchst.</span><span class="i18n-en">Everything you need.</span></h2>
+    <p class="section-sub"><span class="i18n-de">Finovo gibt dir klare Übersicht – ohne Abo-Zwang, ohne Tracking, ohne Werbung.</span><span class="i18n-en">Clarity for your finances – no forced subscriptions, no tracking, no ads.</span></p>
+  </div>
+
   <div class="features-grid">
-    <div class="feature-item">
-      <div class="feature-emoji">💸</div>
-      <div>
-        <h3>Transaktionen tracken</h3>
-        <p>Ausgaben & Einnahmen schnell erfassen, kategorisieren und filtern.</p>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
       </div>
+      <h3><span class="i18n-de">Transaktionen tracken</span><span class="i18n-en">Track transactions</span></h3>
+      <p><span class="i18n-de">Ausgaben & Einnahmen schnell erfassen, kategorisieren und filtern.</span><span class="i18n-en">Capture income & expenses quickly, categorize and filter instantly.</span></p>
     </div>
-    <div class="feature-item">
-      <div class="feature-emoji">📊</div>
-      <div>
-        <h3>Budgets planen</h3>
-        <p>Monatliche Limits pro Kategorie — sieh auf Anhieb, wo du stehst.</p>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       </div>
+      <h3><span class="i18n-de">Budgets planen</span><span class="i18n-en">Plan budgets</span></h3>
+      <p><span class="i18n-de">Monatliche Limits pro Kategorie – sieh auf Anhieb, wo du stehst.</span><span class="i18n-en">Monthly limits per category – see where you stand at a glance.</span></p>
     </div>
-    <div class="feature-item">
-      <div class="feature-emoji">🎯</div>
-      <div>
-        <h3>Sparziele setzen</h3>
-        <p>Definiere Ziele, verfolge den Fortschritt und bleib motiviert.</p>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
       </div>
+      <h3><span class="i18n-de">Sparziele setzen</span><span class="i18n-en">Set savings goals</span></h3>
+      <p><span class="i18n-de">Definiere Ziele, verfolge den Fortschritt und bleib motiviert.</span><span class="i18n-en">Define goals, track progress, and stay motivated.</span></p>
     </div>
-    <div class="feature-item">
-      <div class="feature-emoji">👥</div>
-      <div>
-        <h3>Gemeinsam planen</h3>
-        <p>Partner Mode mit proportionaler Ausgabenteilung nach Einkommen.</p>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
+      <h3>Partner Mode</h3>
+      <p><span class="i18n-de">Gemeinsam planen mit proportionaler Ausgabenteilung nach Einkommen.</span><span class="i18n-en">Plan together with proportional expense splitting by income.</span></p>
     </div>
-    <div class="feature-item">
-      <div class="feature-emoji">☁️</div>
-      <div>
-        <h3>iCloud Sync</h3>
-        <p>Daten sicher und automatisch auf allen deinen Apple-Geräten.</p>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H7A5 5 0 117 9a7 7 0 0113.2 2.4A4.5 4.5 0 0117.5 19z"/></svg>
       </div>
+      <h3>iCloud Sync</h3>
+      <p><span class="i18n-de">Daten sicher und automatisch auf allen deinen Apple-Geräten.</span><span class="i18n-en">Secure, automatic sync across all your Apple devices.</span></p>
     </div>
-    <div class="feature-item">
-      <div class="feature-emoji">🔒</div>
-      <div>
-        <h3>Privatsphäre first</h3>
-        <p>Keine Server, keine Analytik, keine Werbung. Deine Daten gehören dir.</p>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
       </div>
+      <h3><span class="i18n-de">Privatsphäre first</span><span class="i18n-en">Privacy first</span></h3>
+      <p><span class="i18n-de">Keine Server, keine Analytik, keine Werbung. Deine Daten gehören dir.</span><span class="i18n-en">No servers, no analytics, no ads. Your data stays yours.</span></p>
     </div>
   </div>
+</div>
 
-  <!-- Plans -->
-  <div class="plans-heading">Pläne &amp; Preise</div>
-  <div class="plans-grid">
-    <div class="plan-card">
+<!-- WARUM FINOVO? Comparison Table -->
+<div class="compare-section" id="compare">
+  <div class="section-header reveal">
+    <div class="section-label"><span class="i18n-de">Warum Finovo?</span><span class="i18n-en">Why Finovo?</span></div>
+    <h2 class="section-title"><span class="i18n-de">Anders als der Rest.</span><span class="i18n-en">Different by design.</span></h2>
+    <p class="section-sub"><span class="i18n-de">Kein Tracking, keine Bank-Anbindung, kein Datenberg in der Cloud eines Anbieters.</span><span class="i18n-en">No tracking, no bank integration, no pile of data in a vendor's cloud.</span></p>
+  </div>
+  <div class="compare-table reveal">
+    <div class="compare-row head">
+      <div class="col-feat"><span class="i18n-de">Feature</span><span class="i18n-en">Feature</span></div>
+      <div class="col-us">Finovo</div>
+      <div class="col-them"><span class="i18n-de">Andere Apps</span><span class="i18n-en">Other apps</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="col-feat"><span class="i18n-de">Daten bleiben auf deinem Gerät</span><span class="i18n-en">Data stays on your device</span></div>
+      <div class="col-us"><span class="compare-check">✓</span></div>
+      <div class="col-them"><span class="compare-cross">✕</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="col-feat"><span class="i18n-de">Keine Bank-Anbindung nötig</span><span class="i18n-en">No bank integration required</span></div>
+      <div class="col-us"><span class="compare-check">✓</span></div>
+      <div class="col-them"><span class="compare-cross">✕</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="col-feat"><span class="i18n-de">Kein Tracking, keine Werbung</span><span class="i18n-en">No tracking, no ads</span></div>
+      <div class="col-us"><span class="compare-check">✓</span></div>
+      <div class="col-them"><span class="compare-cross">✕</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="col-feat"><span class="i18n-de">Fairer Partner-Split nach Einkommen</span><span class="i18n-en">Fair partner split by income</span></div>
+      <div class="col-us"><span class="compare-check">✓</span></div>
+      <div class="col-them"><span class="compare-text"><span class="i18n-de">selten</span><span class="i18n-en">rare</span></span></div>
+    </div>
+    <div class="compare-row">
+      <div class="col-feat"><span class="i18n-de">Sync via eigener iCloud</span><span class="i18n-en">Sync via your own iCloud</span></div>
+      <div class="col-us"><span class="compare-check">✓</span></div>
+      <div class="col-them"><span class="compare-text"><span class="i18n-de">Anbieter-Server</span><span class="i18n-en">vendor servers</span></span></div>
+    </div>
+    <div class="compare-row">
+      <div class="col-feat"><span class="i18n-de">Kostenlose Grundversion</span><span class="i18n-en">Free core version</span></div>
+      <div class="col-us"><span class="compare-check">✓</span></div>
+      <div class="col-them"><span class="compare-text"><span class="i18n-de">meist Abo</span><span class="i18n-en">often paywalled</span></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY -->
+<div class="privacy-section">
+  <h2 class="reveal"><span class="i18n-de">Deine Daten gehören dir.</span><span class="i18n-en">Your data stays yours.</span></h2>
+  <p class="reveal"><span class="i18n-de">Kein Server. Keine Analyse. Keine Werbung. Finovo speichert alles lokal auf deinem iPhone – vollständig DSGVO-konform.</span><span class="i18n-en">No servers. No analytics. No ads. Finovo stores everything locally on your iPhone – fully GDPR-compliant.</span></p>
+  <div class="privacy-pills reveal">
+    <div class="privacy-pill"><span class="pill-icon">🔒</span> <span class="i18n-de">100 % lokal gespeichert</span><span class="i18n-en">100 % stored locally</span></div>
+    <div class="privacy-pill"><span class="pill-icon">✅</span> <span class="i18n-de">DSGVO-konform</span><span class="i18n-en">GDPR-compliant</span></div>
+    <div class="privacy-pill"><span class="pill-icon">🚫</span> <span class="i18n-de">Keine Werbung</span><span class="i18n-en">No ads</span></div>
+    <div class="privacy-pill"><span class="pill-icon">☁️</span> iCloud Sync</div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section" id="pricing">
+  <div class="section-header reveal">
+    <div class="section-label"><span class="i18n-de">Preise</span><span class="i18n-en">Pricing</span></div>
+    <h2 class="section-title"><span class="i18n-de">Kostenlos starten.</span><span class="i18n-en">Start for free.</span></h2>
+    <p class="section-sub"><span class="i18n-de">Single Mode ist für immer gratis. Partner Mode schaltest du dazu, wenn du gemeinsam planen möchtest.</span><span class="i18n-en">Single Mode is free forever. Add Partner Mode whenever you want to plan together.</span></p>
+  </div>
+
+  <div class="pricing-cards">
+    <div class="pricing-card reveal">
+      <div style="height:30px;"></div>
       <div class="plan-name">Single Mode</div>
-      <div class="plan-price">Kostenlos <span>für immer</span></div>
+      <div class="plan-price">0 €<span class="plan-period"> <span class="i18n-de">/ für immer</span><span class="i18n-en">/ forever</span></span></div>
+      <div class="plan-desc"><span class="i18n-de">Kostenlos. Ohne Einschränkungen. Für immer.</span><span class="i18n-en">Free. No limits. Forever.</span></div>
       <ul class="plan-features">
-        <li>Unbegrenzte Transaktionen</li>
-        <li>Budgetkategorien</li>
-        <li>Sparziele</li>
-        <li>iCloud Sync (eigene Geräte)</li>
-        <li>CSV &amp; JSON Export</li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Ausgaben &amp; Einnahmen erfassen</span><span class="i18n-en">Capture income &amp; expenses</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Monatliche Budgets pro Kategorie</span><span class="i18n-en">Monthly budgets per category</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Persönliche Sparziele verfolgen</span><span class="i18n-en">Personal savings goals</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">iCloud Sync (eigene Geräte)</span><span class="i18n-en">iCloud Sync (own devices)</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Jahresübersicht &amp; Prognose</span><span class="i18n-en">Yearly overview &amp; forecast</span></li>
       </ul>
     </div>
-    <div class="plan-card featured">
-      <div class="plan-badge">Empfohlen</div>
+
+    <div class="pricing-card featured reveal">
+      <div class="popular-badge"><span class="i18n-de">Beliebt</span><span class="i18n-en">Popular</span></div>
+      <div class="plan-badge"><span class="i18n-de">Empfohlen</span><span class="i18n-en">Recommended</span></div>
       <div class="plan-name">Partner Mode</div>
-      <div class="plan-price">ab 2,99 € <span>/ Monat</span></div>
+      <div class="plan-price"><span class="i18n-de">0,99 €</span><span class="i18n-en">€0.99</span><span class="plan-period"> <span class="i18n-de">/ Monat</span><span class="i18n-en">/ month</span></span></div>
+      <div class="plan-desc"><span class="i18n-de">Oder 9,99 € jährlich – 2 Monate gratis.</span><span class="i18n-en">Or €9.99 per year – 2 months free.</span></div>
       <ul class="plan-features">
-        <li>Alles aus Single Mode</li>
-        <li>Zweites Partnerprofil</li>
-        <li>Proportionale Ausgabenteilung</li>
-        <li>Einkommens­tracking</li>
-        <li>Geteilter Haushalt via iCloud</li>
-        <li>Auch jährlich: 24,99 €</li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Alles aus Single Mode</span><span class="i18n-en">Everything in Single Mode</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Zweites Partnerprofil</span><span class="i18n-en">Second partner profile</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Ausgabenteilung nach Nettoeinkommen</span><span class="i18n-en">Expense split by net income</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Gemeinsame Budgets &amp; Sparziele</span><span class="i18n-en">Shared budgets &amp; goals</span></li>
+        <li><div class="check"><svg viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2"/></svg></div><span class="i18n-de">Geteilter Haushalt via iCloud</span><span class="i18n-en">Shared household via iCloud</span></li>
       </ul>
     </div>
   </div>
+</div>
 
-</main>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-links">
-      <a href="support/">Support</a>
-      <a href="privacy/">Datenschutzerklärung</a>
-      <a href="terms/">Nutzungsbedingungen</a>
-      <a href="impressum/">Impressum</a>
-      <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>
-    </div>
-    <div class="footer-copy">© 2026 Lukas Wittmann · Finovo · Alle Rechte vorbehalten</div>
+<!-- FAQ TEASER -->
+<div class="faq-section" id="faq">
+  <div class="section-header reveal">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title"><span class="i18n-de">Häufige Fragen.</span><span class="i18n-en">Common questions.</span></h2>
+    <p class="section-sub"><span class="i18n-de">Das Wichtigste zu Datenschutz, Preisen und Partner Mode.</span><span class="i18n-en">The essentials on privacy, pricing and Partner Mode.</span></p>
   </div>
+  <div class="faq-list reveal">
+    <details class="faq-item">
+      <summary><span class="i18n-de">Wo werden meine Daten gespeichert?</span><span class="i18n-en">Where is my data stored?</span></summary>
+      <div class="faq-body"><span class="i18n-de">Alles liegt lokal auf deinem iPhone. Wenn du iCloud Sync aktivierst, werden deine Daten zusätzlich verschlüsselt in deiner persönlichen iCloud-Datenbank gesichert – nicht auf unseren Servern.</span><span class="i18n-en">Everything lives locally on your iPhone. If you enable iCloud Sync, your data is also encrypted and stored in your personal iCloud database – not on our servers.</span></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="i18n-de">Brauche ich ein Konto oder eine Bank-Anbindung?</span><span class="i18n-en">Do I need an account or bank integration?</span></summary>
+      <div class="faq-body"><span class="i18n-de">Nein. Finovo funktioniert komplett ohne Registrierung und ohne Zugriff auf dein Bankkonto. Du erfasst Ausgaben manuell – das ist bewusst so, aus Datenschutzgründen.</span><span class="i18n-en">No. Finovo works without registration and without access to your bank account. You enter expenses manually – that is intentional, for privacy.</span></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="i18n-de">Was ist Partner Mode genau?</span><span class="i18n-en">What exactly is Partner Mode?</span></summary>
+      <div class="faq-body"><span class="i18n-de">Zwei Personen teilen einen gemeinsamen Haushalt, können Ausgaben zuweisen und diese fair nach Nettoeinkommen aufteilen. Gemeinsame Budgets und Sparziele inklusive.</span><span class="i18n-en">Two people share a common household, can assign expenses and split them fairly by net income. Shared budgets and savings goals are included.</span></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="i18n-de">Kann ich Partner Mode jederzeit kündigen?</span><span class="i18n-en">Can I cancel Partner Mode any time?</span></summary>
+      <div class="faq-body"><span class="i18n-de">Ja, jederzeit direkt in den iOS-Abo-Einstellungen. Bereits erfasste Daten bleiben erhalten, nur die Partner-Funktionen werden deaktiviert.</span><span class="i18n-en">Yes, any time directly in iOS subscription settings. Your data stays; only Partner features get disabled.</span></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="i18n-de">Läuft Finovo auf iPad und Mac?</span><span class="i18n-en">Does Finovo run on iPad and Mac?</span></summary>
+      <div class="faq-body"><span class="i18n-de">Ja. Finovo ist eine Universal-App für iPhone, iPad und Mac (Apple Silicon) mit iCloud Sync auf allen deinen Geräten.</span><span class="i18n-en">Yes. Finovo is a universal app for iPhone, iPad and Mac (Apple Silicon) with iCloud Sync across all your devices.</span></div>
+    </details>
+  </div>
+  <div class="faq-footer">
+    <span class="i18n-de">Noch Fragen? <a href="https://lukeapp.de/apps/finovo/support/">Zum Support →</a></span>
+    <span class="i18n-en">More questions? <a href="https://lukeapp.de/apps/finovo/support/">Go to Support →</a></span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Fin<span>OVO</span></div>
+  <ul class="footer-links">
+    <li><a href="https://lukeapp.de/apps/finovo/support/">Support</a></li>
+    <li><a href="https://lukeapp.de/apps/finovo/privacy/"><span class="i18n-de">Datenschutz</span><span class="i18n-en">Privacy</span></a></li>
+    <li><a href="https://lukeapp.de/apps/finovo/terms/"><span class="i18n-de">Nutzungsbedingungen</span><span class="i18n-en">Terms</span></a></li>
+    <li><a href="https://lukeapp.de/apps/finovo/impressum/">Impressum</a></li>
+    <li><a href="mailto:lukas@lukinet.de"><span class="i18n-de">Kontakt</span><span class="i18n-en">Contact</span></a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Lukas Wittmann · <span class="i18n-de">Alle Rechte vorbehalten</span><span class="i18n-en">All rights reserved</span></div>
 </footer>
+
+<!-- Sticky mobile CTA -->
+<a href="#pricing" class="sticky-cta" id="stickyCta">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+  <span class="i18n-de">Finovo kostenlos laden</span><span class="i18n-en">Get Finovo free</span>
+</a>
+
+<script>
+  (function() {
+    // ── Language toggle ─────────────────────────────────────
+    var html = document.documentElement;
+    var stored = null;
+    try { stored = localStorage.getItem('finovo_lang'); } catch(e) {}
+    var browser = (navigator.language || 'de').toLowerCase().slice(0,2);
+    var initial = stored || (browser === 'en' ? 'en' : 'de');
+    setLang(initial);
+
+    document.querySelectorAll('.lang-toggle button').forEach(function(b) {
+      b.addEventListener('click', function() {
+        setLang(b.getAttribute('data-lang'));
+      });
+    });
+
+    function setLang(lang) {
+      html.setAttribute('lang', lang);
+      try { localStorage.setItem('finovo_lang', lang); } catch(e) {}
+      document.querySelectorAll('.lang-toggle button').forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+    }
+
+    // ── Scroll reveal ───────────────────────────────────────
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if ('IntersectionObserver' in window && !reduce) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('in'); });
+    }
+
+    // ── Animated counters ──────────────────────────────────
+    function animateCount(el) {
+      var target = parseFloat(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var duration = 1200;
+      var start = performance.now();
+      function tick(now) {
+        var p = Math.min(1, (now - start) / duration);
+        var eased = 1 - Math.pow(1 - p, 3);
+        var val = Math.round(target * eased);
+        el.textContent = val + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    if ('IntersectionObserver' in window && !reduce) {
+      var co = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            animateCount(e.target);
+            co.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('[data-count]').forEach(function(el) { co.observe(el); });
+    }
+
+    // ── Sticky mobile CTA: show after hero is scrolled past ─
+    var hero = document.querySelector('.hero');
+    var sticky = document.getElementById('stickyCta');
+    if (hero && sticky) {
+      var showObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          sticky.classList.toggle('show', !e.isIntersecting);
+        });
+      }, { rootMargin: '-60px 0px 0px 0px' });
+      showObs.observe(hero);
+    }
+  })();
+</script>
 
 </body>
 </html>
