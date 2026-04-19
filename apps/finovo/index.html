@@ -614,7 +614,9 @@
   }
 
   @media (max-width: 768px) {
-    nav { padding: 0 20px; }
+    nav { padding: 0 16px; gap: 8px; }
+    .nav-links { display: none; }
+    .nav-logo { font-size: 16px; }
     .hero { padding: 60px 20px 40px; }
     .hero h1 { font-size: 36px; }
     .screenshots-section, .features-section, .privacy-section, .pricing-section { padding: 48px 20px; }
@@ -1213,6 +1215,12 @@
     .compare-section, .faq-section { padding: 48px 20px; }
     main, footer { padding-bottom: 80px !important; }
     footer { padding: 24px 20px 90px; }
+
+    /* Compact nav controls on mobile */
+    .lang-toggle { margin-right: 6px; padding: 1px; }
+    .lang-toggle button { padding: 3px 8px; font-size: 10px; letter-spacing: 0.3px; }
+    .nav-cta { padding: 6px 12px 6px 10px; font-size: 13px; gap: 5px; }
+    .nav-cta svg { width: 12px; height: 12px; }
   }
 </style>
 </head>
@@ -1244,7 +1252,6 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-wordmark" aria-label="Finovo">Fin<span>OVO</span></div>
-  <div class="hero-eyebrow"><span class="dot"></span><span class="i18n-de">Launching 2026 · iOS 17+</span><span class="i18n-en">Launching 2026 · iOS 17+</span></div>
   <h1>
     <span class="i18n-de">Finanzen im <span class="green">Griff.</span></span>
     <span class="i18n-en">Finances <span class="green">in check.</span></span>
