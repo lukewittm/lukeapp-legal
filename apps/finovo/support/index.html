@@ -246,6 +246,69 @@
       .faq-body { padding: 14px 18px 16px; }
       footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
     }
+  
+    /* ═══════ Unified with marketing page ═══════ */
+
+    /* Lang switch → match marketing "lang-toggle" look */
+    .lang-switch {
+      background: var(--bg) !important;
+      border: 0.5px solid var(--border) !important;
+      border-radius: 100px !important;
+      padding: 2px !important;
+      display: inline-flex !important;
+    }
+    .lang-switch button {
+      background: transparent !important;
+      border: none !important;
+      padding: 4px 10px !important;
+      border-radius: 100px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.4px !important;
+      color: var(--gray) !important;
+      cursor: pointer !important;
+      transition: background 0.2s ease, color 0.2s ease !important;
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--white) !important;
+      color: var(--text) !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+    }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:     #0B0F14;
+        --white:  #12171E;
+        --text:   #F5F5F7;
+        --text2:  #E5E5EA;
+        --gray:   #98989F;
+        --border: rgba(255,255,255,0.1);
+        --green-light: rgba(34,197,94,0.15);
+      }
+      body { background: #0B0F14; }
+      nav { background: rgba(11,15,20,0.8) !important; }
+      .back-btn { background: #12171E; color: var(--text); }
+      .back-btn:hover { background: rgba(34,197,94,0.15); color: #22C55E; border-color: rgba(34,197,94,0.35); }
+      .hero, .card, .faq-item, footer { background: #12171E !important; }
+      .badge { background: rgba(34,197,94,0.18); color: #22C55E; }
+      .info-row, .note-box, .stack .body { color: var(--text2); }
+      .info-row .label { color: var(--gray); }
+      .info-row .value a, .stack .body a { color: #22C55E; }
+      .note-box { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3); color: var(--text2); }
+      .lang-switch { background: #12171E !important; }
+      .lang-switch button[aria-pressed="true"] { background: #2A2A2C !important; color: var(--text) !important; }
+      /* FAQ / support specific */
+      .faq-item summary { color: var(--text); }
+      .faq-body, .faq-answer { color: var(--text2); }
+      .feature-card { background: #181E26 !important; }
+      /* privacy/terms section content blocks */
+      section, .policy-section, .terms-section { color: var(--text2); }
+      h1, h2, h3, h4 { color: var(--text); }
+    }
+
+    /* Canonical theme-color already set via meta, theme-color in dark */
+
   </style>
 </head>
 <body>
