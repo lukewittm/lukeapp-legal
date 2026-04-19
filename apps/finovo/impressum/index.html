@@ -205,19 +205,34 @@
 
     /* Canonical theme-color already set via meta, theme-color in dark */
 
+    /* Language switching */
+    .lang { display: none; }
+    .lang.active { display: block; }
+    .en-only { display: none; }
+    html[lang="en"] .de-only { display: none; }
+    html[lang="en"] .en-only { display: inline; }
+
   </style>
 </head>
 <body>
 
 <nav>
   <a href="../" class="nav-logo">Fin<span>OVO</span></a>
-  <a href="../" class="back-btn" aria-label="Zurück zur Startseite">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-    Zurück
-  </a>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a href="../" class="back-btn" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span class="de-only">Zurück</span><span class="en-only">Back</span>
+    </a>
+  </div>
 </nav>
 
 <main>
+
+<div class="lang active" data-lang="de">
 
   <div class="hero">
     <div class="badge">§ 5 DDG</div>
@@ -306,18 +321,132 @@
     </div>
   </div>
 
+</div>
+
+<div class="lang" data-lang="en">
+
+  <div class="hero">
+    <div class="badge">§ 5 DDG</div>
+    <h1>Legal Notice</h1>
+    <p>Information pursuant to § 5 German Digital Services Act (DDG) and § 18 Interstate Media Treaty (MStV). The binding German version is shown when you switch to DE.</p>
+  </div>
+
+  <div class="card">
+    <h2>Controller / Service Provider</h2>
+    <div class="info-row">
+      <div class="label">Name</div>
+      <div class="value">Lukas Wittmann</div>
+    </div>
+    <div class="info-row">
+      <div class="label">Legal form</div>
+      <div class="value">Sole proprietor (Einzelunternehmer)</div>
+    </div>
+    <div class="info-row">
+      <div class="label">Address</div>
+      <div class="value">
+        Erlenstraße 10A<br>91074 Herzogenaurach · Germany
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="label">Email</div>
+      <div class="value"><a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>App Information</h2>
+    <div class="info-row">
+      <div class="label">App name</div>
+      <div class="value">Finovo</div>
+    </div>
+    <div class="info-row">
+      <div class="label">Platform</div>
+      <div class="value">iOS (Apple App Store)</div>
+    </div>
+    <div class="info-row">
+      <div class="label">Distributed via</div>
+      <div class="value"><a href="https://apps.apple.com" target="_blank" rel="noopener">Apple App Store</a></div>
+    </div>
+    <div class="info-row">
+      <div class="label">Website</div>
+      <div class="value"><a href="https://lukeapp.de">lukeapp.de</a></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Disclaimer</h2>
+    <div class="stack">
+      <div>
+        <div class="title">Liability for content</div>
+        <div class="body">The content of this app has been created with the greatest care. We cannot, however, guarantee its accuracy, completeness, or timeliness. The app is intended solely for personal household planning and does not constitute financial or tax advice.</div>
+      </div>
+      <div>
+        <div class="title">Liability for links</div>
+        <div class="body">Our offering contains links to external third-party websites whose content we have no influence over. The respective provider is always responsible for the content of the linked pages.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Copyright</h2>
+    <div class="stack">
+      <div class="body">Content and works created by the app operator within this app are subject to German copyright law. Reproduction, editing, distribution, and any kind of use outside the limits of copyright law require the written consent of the respective author.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Dispute Resolution (EU)</h2>
+    <div class="stack">
+      <div class="body">
+        The European Commission provides a platform for online dispute resolution (ODR):
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>
+      </div>
+      <div class="note-box">
+        We are neither obliged nor willing to participate in dispute resolution proceedings before a consumer arbitration body.
+      </div>
+    </div>
+  </div>
+
+</div>
+
 </main>
 
 <footer>
   <div class="footer-logo">Fin<span>OVO</span></div>
   <ul class="footer-links">
     <li><a href="../support/">Support</a></li>
-    <li><a href="../privacy/">Datenschutz</a></li>
-    <li><a href="../terms/">Terms</a></li>
-    <li><a href="mailto:lukas@lukinet.de">Kontakt</a></li>
+    <li><a href="../privacy/"><span class="de-only">Datenschutz</span><span class="en-only">Privacy</span></a></li>
+    <li><a href="../terms/"><span class="de-only">Nutzungsbedingungen</span><span class="en-only">Terms</span></a></li>
+    <li><a href="mailto:lukas@lukinet.de"><span class="de-only">Kontakt</span><span class="en-only">Contact</span></a></li>
   </ul>
   <div class="footer-copy">© 2026 Lukas Wittmann</div>
 </footer>
+
+<script>
+  (function() {
+    var root = document.documentElement;
+    var buttons = document.querySelectorAll(".lang-switch button");
+    function setLang(lang) {
+      document.querySelectorAll(".lang").forEach(function(el) {
+        el.classList.toggle("active", el.getAttribute("data-lang") === lang);
+      });
+      buttons.forEach(function(b) {
+        b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+      });
+      root.setAttribute("lang", lang);
+      try { localStorage.setItem("finovoLang", lang); } catch(e) {}
+    }
+    buttons.forEach(function(b) { b.addEventListener("click", function() { setLang(b.dataset.lang); }); });
+    var initial = (location.hash || "").replace("#", "");
+    if (initial !== "en" && initial !== "de") {
+      try { initial = localStorage.getItem("finovoLang"); } catch(e) {}
+      if (initial !== "en" && initial !== "de") {
+        initial = (navigator.language || "de").toLowerCase().indexOf("de") === 0 ? "de" : "en";
+      }
+    }
+    setLang(initial);
+  })();
+</script>
 
 </body>
 </html>

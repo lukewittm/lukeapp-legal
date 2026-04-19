@@ -1655,9 +1655,11 @@
     // ── Language toggle ─────────────────────────────────────
     var html = document.documentElement;
     var stored = null;
-    try { stored = localStorage.getItem('finovo_lang'); } catch(e) {}
+    try { stored = localStorage.getItem('finovoLang'); } catch(e) {}
+    var hash = (location.hash || '').replace('#','');
     var browser = (navigator.language || 'de').toLowerCase().slice(0,2);
-    var initial = stored || (browser === 'en' ? 'en' : 'de');
+    var initial = (hash === 'en' || hash === 'de') ? hash
+                : stored || (browser === 'en' ? 'en' : 'de');
     setLang(initial);
 
     document.querySelectorAll('.lang-toggle button').forEach(function(b) {
@@ -1668,9 +1670,25 @@
 
     function setLang(lang) {
       html.setAttribute('lang', lang);
-      try { localStorage.setItem('finovo_lang', lang); } catch(e) {}
+      try { localStorage.setItem('finovoLang', lang); } catch(e) {}
       document.querySelectorAll('.lang-toggle button').forEach(function(b) {
         b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+      // Propagate language to internal subpage links via hash
+      var base = location.origin + '/apps/finovo/';
+      document.querySelectorAll('a[href]').forEach(function(a) {
+        var href = a.getAttribute('href');
+        if (!href) return;
+        // Only touch links going to our subpages
+        var m = href.match(/(?:lukeapp\.de)?\/apps\/finovo\/(privacy|terms|support|impressum)\/?$/);
+        if (!m) {
+          // Also handle relative forms like "privacy/" (unlikely here) or full URLs
+          var m2 = href.match(/^https?:\/\/lukeapp\.de\/apps\/finovo\/(privacy|terms|support|impressum)\/?(?:#.*)?$/);
+          if (!m2) return;
+          a.setAttribute('href', 'https://lukeapp.de/apps/finovo/' + m2[1] + '/#' + lang);
+          return;
+        }
+        a.setAttribute('href', href.replace(/#.*$/, '').replace(/\/?$/, '/') + '#' + lang);
       });
     }
 

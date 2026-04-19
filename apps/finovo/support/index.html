@@ -309,19 +309,34 @@
 
     /* Canonical theme-color already set via meta, theme-color in dark */
 
+    /* Language switching */
+    .lang { display: none; }
+    .lang.active { display: block; }
+    .en-only { display: none; }
+    html[lang="en"] .de-only { display: none; }
+    html[lang="en"] .en-only { display: inline; }
+
   </style>
 </head>
 <body>
 
 <nav>
   <a href="../" class="nav-logo">Fin<span>OVO</span></a>
-  <a href="../" class="back-btn" aria-label="Zurück zur Startseite">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-    Zurück
-  </a>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a href="../" class="back-btn" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span class="de-only">Zurück</span><span class="en-only">Back</span>
+    </a>
+  </div>
 </nav>
 
 <main>
+
+<div class="lang active" data-lang="de">
 
   <!-- Hero -->
   <div class="hero">
@@ -464,18 +479,191 @@
     </div>
   </details>
 
+</div>
+
+<div class="lang" data-lang="en">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>How can we help?</h1>
+    <p>Find answers to common questions or reach out directly — we reply within 48 hours.</p>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-card">
+    <div class="contact-icon">✉️</div>
+    <div>
+      <h2>Get in touch</h2>
+      <p>Describe your issue as precisely as possible — your iOS version and app version help us resolve it quickly.</p>
+      <a class="btn" href="mailto:lukas@lukinet.de?subject=Finovo%20Support">Send email</a>
+    </div>
+  </div>
+
+  <!-- Features overview -->
+  <div class="section-title">What Finovo does</div>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="emoji">💸</div>
+      <h3>Transactions</h3>
+      <p>Log income and expenses fast, then categorize them.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">📊</div>
+      <h3>Budgets</h3>
+      <p>Set monthly limits per category and stay on track.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">🎯</div>
+      <h3>Savings Goals</h3>
+      <p>Define goals and watch your progress grow.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">👥</div>
+      <h3>Partner Mode</h3>
+      <p>Share a household and split expenses proportionally.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">☁️</div>
+      <h3>iCloud Sync</h3>
+      <p>Data synced automatically across your devices.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">📤</div>
+      <h3>Export</h3>
+      <p>Export all data as CSV or JSON anytime.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-title">Frequently asked questions</div>
+
+  <details class="faq-item">
+    <summary>What is the difference between Single Mode and Partner Mode?</summary>
+    <div class="faq-body">
+      <p><strong>Single Mode (free)</strong> is for individuals: transactions, budgets, savings goals, and iCloud Sync across your own devices.</p>
+      <p><strong>Partner Mode (subscription)</strong> adds: a second profile for your partner, income-based expense splitting, and a shared household via iCloud CloudKit.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I cancel my Partner Mode subscription?</summary>
+    <div class="faq-body">
+      <p>The subscription is fully managed by Apple. To cancel:</p>
+      <ul>
+        <li>iOS: <strong>Settings → [Your Name] → Subscriptions</strong></li>
+        <li>Or in the app: <strong>Settings → Subscription → Manage Subscription</strong></li>
+      </ul>
+      <p>You can keep using Partner Mode until the end of the paid period.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I restore purchases?</summary>
+    <div class="faq-body">
+      <p>In the app, go to <strong>Settings → Subscription → Restore Purchases</strong>. You need to be signed in with the same Apple ID you originally purchased with.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Where is my data stored?</summary>
+    <div class="faq-body">
+      <p>All data is stored <strong>locally on your device</strong>. Finovo operates no servers of its own. In Partner Mode, data is additionally kept in your personal <strong>iCloud account</strong> — and nowhere else.</p>
+      <p>More details: <a href="../privacy/">Privacy Policy</a>.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I export my data?</summary>
+    <div class="faq-body">
+      <p>In the app, go to <strong>Settings → Backup & Export</strong>. You can export all transactions as <strong>CSV</strong> (for Excel/Numbers) or <strong>JSON</strong> (for developers).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I invite my partner?</summary>
+    <div class="faq-body">
+      <p>Partner Mode must be active. Then: <strong>Settings → Sync & Sharing → Invite Contributor</strong>. Your partner receives an iCloud invitation; once accepted, they can see the shared household.</p>
+      <p>Both of you need to be signed in to iCloud with an Apple ID.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is income data used for?</summary>
+    <div class="faq-body">
+      <p>Income data is used <strong>only</strong> to calculate the ratio for expense splitting (e.g. 60/40 instead of 50/50). It is <strong>not</strong> shared with your partner automatically and does not leave your device (unless you enable iCloud Sync).</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>The app won't start or keeps crashing — what can I do?</summary>
+    <div class="faq-body">
+      <p>Please try the following, in order:</p>
+      <ul>
+        <li>Fully close the app and relaunch it</li>
+        <li>Restart your iPhone</li>
+        <li>Make sure iOS is up to date</li>
+        <li>Delete and reinstall from the App Store (iCloud data is preserved)</li>
+      </ul>
+      <p>If the problem persists, please email us with your iOS version and a short description: <a href="mailto:lukas@lukinet.de?subject=Finovo%20Crash%20Report">lukas@lukinet.de</a></p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>How do I delete all my data?</summary>
+    <div class="faq-body">
+      <p>In the app: <strong>Settings → Reset Data</strong>. This permanently deletes all local data.</p>
+      <p>For iCloud data: <strong>iOS Settings → [Your Name] → iCloud → Manage Storage → Finovo</strong>.</p>
+      <div class="notice yellow">⚠️ This cannot be undone. Export your data first if you need to keep it.</div>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is there an Android version?</summary>
+    <div class="faq-body">
+      <p>Finovo is currently iOS-only. An Android version is not planned.</p>
+    </div>
+  </details>
+
+</div>
+
 </main>
 
 <footer>
   <div class="footer-logo">Fin<span>OVO</span></div>
   <ul class="footer-links">
-    <li><a href="../privacy/">Datenschutz</a></li>
-    <li><a href="../terms/">Terms</a></li>
-    <li><a href="../impressum/">Impressum</a></li>
-    <li><a href="mailto:lukas@lukinet.de">Kontakt</a></li>
+    <li><a href="../privacy/"><span class="de-only">Datenschutz</span><span class="en-only">Privacy</span></a></li>
+    <li><a href="../terms/"><span class="de-only">Nutzungsbedingungen</span><span class="en-only">Terms</span></a></li>
+    <li><a href="../impressum/"><span class="de-only">Impressum</span><span class="en-only">Legal Notice</span></a></li>
+    <li><a href="mailto:lukas@lukinet.de"><span class="de-only">Kontakt</span><span class="en-only">Contact</span></a></li>
   </ul>
   <div class="footer-copy">© 2026 Lukas Wittmann</div>
 </footer>
+
+<script>
+  (function() {
+    var root = document.documentElement;
+    var buttons = document.querySelectorAll(".lang-switch button");
+    function setLang(lang) {
+      document.querySelectorAll(".lang").forEach(function(el) {
+        el.classList.toggle("active", el.getAttribute("data-lang") === lang);
+      });
+      buttons.forEach(function(b) {
+        b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+      });
+      root.setAttribute("lang", lang);
+      try { localStorage.setItem("finovoLang", lang); } catch(e) {}
+    }
+    buttons.forEach(function(b) { b.addEventListener("click", function() { setLang(b.dataset.lang); }); });
+    var initial = (location.hash || "").replace("#", "");
+    if (initial !== "en" && initial !== "de") {
+      try { initial = localStorage.getItem("finovoLang"); } catch(e) {}
+      if (initial !== "en" && initial !== "de") {
+        initial = (navigator.language || "de").toLowerCase().indexOf("de") === 0 ? "de" : "en";
+      }
+    }
+    setLang(initial);
+  })();
+</script>
 
 </body>
 </html>
