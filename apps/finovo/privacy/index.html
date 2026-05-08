@@ -411,7 +411,7 @@
       <div class="meta-item"><strong>App:</strong> Finovo (iOS)</div>
       <div class="meta-item"><strong>Verantwortlicher:</strong> Lukas Wittmann</div>
       <div class="meta-item"><strong>Kontakt:</strong> <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a></div>
-      <div class="meta-item"><strong>Stand:</strong> 18. April 2026 · Version 2.0</div>
+      <div class="meta-item"><strong>Stand:</strong> 8. Mai 2026 · Version 2.1</div>
     </div>
   </div>
 
@@ -453,11 +453,12 @@
           <tr><td><strong>Identifikationsdaten</strong></td><td>Vorname, ggf. Partnername</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
           <tr><td><strong>Profilbild</strong></td><td>Optionales Foto</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. a DSGVO</td></tr>
           <tr><td><strong>Einkommensdaten</strong></td><td>Monatliches/jährliches Nettoeinkommen</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
-          <tr><td><strong>Finanztransaktionen</strong></td><td>Betrag, Kategorie, Datum, Notiz</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
-          <tr><td><strong>Budgets &amp; Kategorien</strong></td><td>Kategoriename, Budgetlimit</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+          <tr><td><strong>Finanztransaktionen</strong></td><td>Betrag, Kategorie, Datum, Notiz, CSV-Rohbeschreibung, normalisierter Händlername, Import-Fingerprint und Import-Batch-ID</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+          <tr><td><strong>Budgets &amp; Kategorien</strong></td><td>Kategoriename, Budgetlimit, Zuordnung zu Person/Haushalt</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
           <tr><td><strong>Sparziele</strong></td><td>Zielname, Betrag, Deadline</td><td>Lokal / iCloud¹</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+          <tr><td><strong>Lokal erzeugte KI-Inhalte</strong></td><td>Kategorievorschläge, bereinigte Händlernamen, Monats-Insights, Ziel-Coaching und Suchfilter</td><td>Lokal / teilweise iCloud¹</td><td>Art. 6 Abs. 1 lit. b/f DSGVO</td></tr>
           <tr><td><strong>App-Einstellungen</strong></td><td>Sprache, Onboarding-Status, Filter</td><td>Lokal (UserDefaults)</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
-          <tr><td><strong>Abonnementstatus</strong></td><td>Aktiver Plan, Ablaufdatum</td><td>Apple / lokal</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+          <tr><td><strong>Abonnementstatus</strong></td><td>Aktiver Plan, Ablaufdatum, Kulanzfrist-Status</td><td>Apple / lokal / Keychain</td><td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
         </tbody>
       </table>
     </div>
@@ -475,6 +476,8 @@
       <li>Berechnung proportionaler Ausgabenteilung anhand von Einkommensdaten</li>
       <li>Geräteübergreifende Synchronisierung über iCloud/CloudKit</li>
       <li>Teilen von Haushaltsdaten mit einem Partner über CloudKit Sharing (nur Partner-Modus)</li>
+      <li>CSV-Import, Duplikaterkennung per SHA-256-Fingerprint und Batch-Rückgängig</li>
+      <li>Lokale Apple-Intelligence-Funktionen für Vorschläge, Suche, Händlerbereinigung, Ziel-Coaching und Monats-Insights</li>
       <li>Abwicklung von In-App-Käufen (Abonnement Partner-Modus, über Apple)</li>
     </ul>
     <p>Es findet <strong>keine</strong> Verarbeitung für Werbezwecke, kein Profiling und keine automatisierte Entscheidungsfindung im Sinne des Art. 22 DSGVO statt.</p>
@@ -505,7 +508,7 @@
       <h2>Datenspeicherung &amp; Löschung</h2>
     </div>
     <h3>4.1 Lokale Speicherung</h3>
-    <p>Alle Daten werden primär lokal auf Ihrem iOS-Gerät gespeichert (SwiftData, UserDefaults, Keychain für sensible Flags). Durch Deinstallation der App werden alle lokalen Daten entfernt. Die App bietet zusätzlich eine „Daten zurücksetzen"-Funktion in den Einstellungen.</p>
+    <p>Alle Daten werden primär lokal auf Ihrem iOS-Gerät gespeichert (SwiftData, UserDefaults, Keychain für sensible Flags). Lokale Caches können bereinigte Händlernamen, Monats-Insights und Sync-Zustände enthalten. Durch Deinstallation der App werden alle lokalen Daten entfernt. Die App bietet zusätzlich eine „Alle Daten löschen"-Funktion in den Einstellungen, die auch lokale KI- und Import-Caches entfernt.</p>
     <h3>4.2 iCloud-Speicherung (CloudKit)</h3>
     <p>Sofern Sie iCloud verwenden, werden Ihre Daten über Apple CloudKit in <em>Ihrer eigenen</em> privaten iCloud-Datenbank gespeichert. Der Entwickler hat keinen Zugriff auf diese Daten. iCloud-Daten können über <em>Einstellungen → [Ihr Name] → iCloud → Speicher verwalten → Finovo</em> entfernt werden.</p>
     <h3>4.3 Löschmarker („Tombstones")</h3>
@@ -536,6 +539,11 @@
             <td>Abonnementverwaltung, Zahlungsabwicklung</td>
             <td>Apple fungiert als eigenständiger Verantwortlicher für die Zahlungsabwicklung</td>
           </tr>
+          <tr>
+            <td><strong>Apple Inc. – APNs / Hintergrundaktualisierung</strong></td>
+            <td>Stille CloudKit-Änderungsbenachrichtigungen und Hintergrund-Sync</td>
+            <td>Apple-Dienst; keine Finanzinhalte in Push-Payloads</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -553,7 +561,7 @@
       <li>Sie kontrollieren vollständig, ob und mit wem Sie teilen. Die Freigabe erfolgt aktiv über die iOS-Systemdialoge.</li>
       <li>Sie können die Freigabe jederzeit widerrufen; die weitere Synchronisation geteilter Inhalte endet dann.</li>
       <li>Die Datenübertragung ist TLS-verschlüsselt und läuft ausschließlich über Apples iCloud-Infrastruktur.</li>
-      <li>Einkommensdaten werden <strong>nicht</strong> automatisch geteilt – sie dienen nur zur lokalen Berechnung von Aufteilungsverhältnissen.</li>
+      <li>Einkommensdaten werden geteilt, wenn Partner-Sharing aktiv ist, damit beide Geräte denselben Haushalt und dieselben Aufteilungsgrundlagen berechnen können.</li>
     </ul>
   </div>
 
@@ -570,9 +578,9 @@
         <tbody>
           <tr><td class="right-label">Auskunft</td><td><span class="article-badge">Art. 15</span></td><td>Alle Daten sind direkt in der App einsehbar. Auf Anfrage erteilen wir schriftlich Auskunft.</td></tr>
           <tr><td class="right-label">Berichtigung</td><td><span class="article-badge">Art. 16</span></td><td>Unrichtige Daten können jederzeit direkt in der App korrigiert werden.</td></tr>
-          <tr><td class="right-label">Löschung</td><td><span class="article-badge">Art. 17</span></td><td>Einstellungen → Daten zurücksetzen, oder App deinstallieren.</td></tr>
+          <tr><td class="right-label">Löschung</td><td><span class="article-badge">Art. 17</span></td><td>Einstellungen → Alle Daten löschen, oder App deinstallieren.</td></tr>
           <tr><td class="right-label">Einschränkung</td><td><span class="article-badge">Art. 18</span></td><td>iCloud-Sync kann in den iOS-Einstellungen deaktiviert werden.</td></tr>
-          <tr><td class="right-label">Datenübertragbarkeit</td><td><span class="article-badge">Art. 20</span></td><td>Einstellungen → Export (CSV) – alle Daten in maschinenlesbarem Format.</td></tr>
+          <tr><td class="right-label">Datenübertragbarkeit</td><td><span class="article-badge">Art. 20</span></td><td>Einstellungen → Datenverwaltung → Backup exportieren (JSON) – alle Daten in maschinenlesbarem Format.</td></tr>
           <tr><td class="right-label">Widerruf der Einwilligung</td><td><span class="article-badge">Art. 7 Abs. 3</span></td><td>Profilbild, Benachrichtigungen und Freigaben jederzeit deaktivierbar.</td></tr>
           <tr><td class="right-label">Widerspruch</td><td><span class="article-badge">Art. 21</span></td><td>Bei Verarbeitung auf Basis von Art. 6 Abs. 1 lit. f: schriftlich an <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>.</td></tr>
         </tbody>
@@ -615,20 +623,30 @@
       <h2>Keine Analytik &amp; keine Werbung</h2>
     </div>
     <div class="no-tracking">✅ Finovo enthält keine Analyse-SDKs, keine Werbenetzwerke und kein Cross-App-Tracking.</div>
-    <p>Es werden keine Gerätekennungen für Werbezwecke (IDFA) verwendet. Das App-Tracking-Transparenz-Framework (ATT) wird nicht benötigt. Es werden keine Nutzerdaten verkauft.</p>
+    <p>Es werden keine Gerätekennungen für Werbezwecke (IDFA) verwendet. Das App-Tracking-Transparenz-Framework (ATT) wird nicht benötigt. Es werden keine Nutzerdaten verkauft. Die unten beschriebenen Apple-Intelligence-Funktionen laufen ausschließlich auf dem Gerät; Apple Private Cloud Compute wird von Finovo nicht aktiviert.</p>
   </div>
 
   <div class="section">
     <div class="section-header">
       <div class="section-num">11</div>
-      <h2>Lokale Benachrichtigungen</h2>
+      <h2>Apple Intelligence / lokale KI-Funktionen</h2>
     </div>
-    <p>Die App kann lokale Benachrichtigungen planen (Budget-Erinnerungen, wiederkehrende Buchungen). Diese werden lokal von iOS erzeugt und nicht über einen Server versendet. Push-Benachrichtigungen des Entwicklers werden nicht zu Werbezwecken genutzt. Deaktivierbar unter iOS-Einstellungen → Mitteilungen → Finovo.</p>
+    <p>Finovo nutzt Apples FoundationModels-Framework auf kompatiblen Geräten für lokale Vorschläge und Zusammenfassungen. Dazu gehören Kategorievorschläge beim CSV-Import, die Bereinigung von Händler-/Verwendungszwecktexten, Monats-Insights, Ziel-Coaching und die Auswertung natürlicher Suchanfragen.</p>
+    <p>Die Verarbeitung findet auf dem Gerät statt. Es werden keine Daten an Entwickler-Server, Drittanbieter-KI-Dienste oder Apple Private Cloud Compute gesendet. Eingaben können Bankbeschreibungen, Notizen, Zielnamen und aggregierte Finanzzahlen enthalten. Ergebnisse wie bereinigte Händlernamen und Monats-Insights können lokal gespeichert werden; bereinigte Händlernamen können mit Transaktionen synchronisiert werden, wenn iCloud/Partner-Sharing aktiv ist. Ist Apple Intelligence nicht verfügbar oder deaktiviert, nutzt die App deterministische Fallbacks.</p>
+    <p>KI-Ausgaben sind Vorschläge und Erläuterungen. Es findet keine automatisierte Entscheidung mit rechtlicher Wirkung im Sinne des Art. 22 DSGVO statt.</p>
   </div>
 
   <div class="section">
     <div class="section-header">
       <div class="section-num">12</div>
+      <h2>Lokale Benachrichtigungen &amp; APNs</h2>
+    </div>
+    <p>Die App kann lokale Benachrichtigungen planen (Budget-Erinnerungen, wiederkehrende Buchungen). Diese werden lokal von iOS erzeugt. Für CloudKit-Änderungen kann Apple Push Notification service (APNs) stille Hintergrundbenachrichtigungen ausliefern; diese enthalten keine Finanzinhalte und werden nicht zu Werbezwecken genutzt. Deaktivierbar unter iOS-Einstellungen → Mitteilungen → Finovo.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">13</div>
       <h2>Kinder und Minderjährige</h2>
     </div>
     <p>Finovo richtet sich an Personen ab <strong>16 Jahren</strong>. Wir erheben wissentlich keine personenbezogenen Daten von Kindern unter 16 Jahren. Erziehungsberechtigte können sich bei Fragen an <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a> wenden.</p>
@@ -636,7 +654,7 @@
 
   <div class="section">
     <div class="section-header">
-      <div class="section-num">13</div>
+      <div class="section-num">14</div>
       <h2>Änderungen dieser Datenschutzerklärung</h2>
     </div>
     <p>Wir behalten uns vor, diese Datenschutzerklärung bei Änderungen der App oder der Rechtslage anzupassen. Die aktuelle Version ist stets unter dieser URL und in der App unter <em>Einstellungen → About → Datenschutzerklärung</em> abrufbar. Das Datum der letzten Änderung ist oben angegeben.</p>
@@ -658,7 +676,7 @@
       <div class="meta-item"><strong>App:</strong> Finovo (iOS)</div>
       <div class="meta-item"><strong>Controller:</strong> Lukas Wittmann</div>
       <div class="meta-item"><strong>Contact:</strong> <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a></div>
-      <div class="meta-item"><strong>Effective:</strong> 18 April 2026 · Version 2.0</div>
+      <div class="meta-item"><strong>Effective:</strong> 8 May 2026 · Version 2.1</div>
     </div>
   </div>
 
@@ -700,11 +718,12 @@
           <tr><td><strong>Identification data</strong></td><td>First name, optional partner name</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
           <tr><td><strong>Profile photo</strong></td><td>Optional photo</td><td>Local / iCloud¹</td><td>Art. 6 (1) (a) GDPR</td></tr>
           <tr><td><strong>Income data</strong></td><td>Monthly/annual net income</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
-          <tr><td><strong>Financial transactions</strong></td><td>Amount, category, date, note</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
-          <tr><td><strong>Budgets &amp; categories</strong></td><td>Name, budget limit</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Financial transactions</strong></td><td>Amount, category, date, note, CSV raw description, cleaned merchant name, import fingerprint and import batch ID</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Budgets &amp; categories</strong></td><td>Name, budget limit, person/household ownership</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
           <tr><td><strong>Savings goals</strong></td><td>Goal name, amount, deadline</td><td>Local / iCloud¹</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Locally generated AI content</strong></td><td>Category suggestions, cleaned merchant names, monthly insights, goal coaching and search filters</td><td>Local / partly iCloud¹</td><td>Art. 6 (1) (b)/(f) GDPR</td></tr>
           <tr><td><strong>App preferences</strong></td><td>Language, onboarding state, filters</td><td>Local (UserDefaults)</td><td>Art. 6 (1) (b) GDPR</td></tr>
-          <tr><td><strong>Subscription status</strong></td><td>Active plan, expiry date</td><td>Apple / local</td><td>Art. 6 (1) (b) GDPR</td></tr>
+          <tr><td><strong>Subscription status</strong></td><td>Active plan, expiry date, grace-period state</td><td>Apple / local / Keychain</td><td>Art. 6 (1) (b) GDPR</td></tr>
         </tbody>
       </table>
     </div>
@@ -722,6 +741,8 @@
       <li>Calculating proportional expense sharing based on income data</li>
       <li>Cross-device synchronisation via iCloud/CloudKit</li>
       <li>Sharing household data with a partner via CloudKit Sharing (Partner Mode only)</li>
+      <li>CSV import, duplicate detection via SHA-256 fingerprints and batch undo</li>
+      <li>Local Apple Intelligence features for suggestions, search, merchant cleanup, goal coaching and monthly insights</li>
       <li>Processing in-app purchases (Partner Mode subscription, handled by Apple)</li>
     </ul>
     <p>There is <strong>no</strong> processing for advertising purposes, no profiling, and no automated decision-making within the meaning of Art. 22 GDPR.</p>
@@ -752,7 +773,7 @@
       <h2>Storage &amp; deletion</h2>
     </div>
     <h3>4.1 Local storage</h3>
-    <p>All data is primarily stored on your iOS device (SwiftData, UserDefaults, Keychain for sensitive flags). Uninstalling the App removes all local data. The App additionally provides a "Reset data" option in Settings.</p>
+    <p>All data is primarily stored on your iOS device (SwiftData, UserDefaults, Keychain for sensitive flags). Local caches may include cleaned merchant names, monthly insights and sync state. Uninstalling the App removes all local data. The App additionally provides a "Delete all data" option in Settings, which also removes local AI and import caches.</p>
     <h3>4.2 iCloud storage (CloudKit)</h3>
     <p>If you use iCloud, your data is stored via Apple CloudKit in <em>your own</em> private iCloud database. The developer has no access to this data. iCloud data can be removed via <em>Settings → [your name] → iCloud → Manage Storage → Finovo</em>.</p>
     <h3>4.3 Deletion markers (tombstones)</h3>
@@ -783,6 +804,11 @@
             <td>Subscription management, payment processing</td>
             <td>Apple acts as independent controller for payment processing</td>
           </tr>
+          <tr>
+            <td><strong>Apple Inc. – APNs / background refresh</strong></td>
+            <td>Silent CloudKit change notifications and background sync</td>
+            <td>Apple service; no financial content in push payloads</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -800,7 +826,7 @@
       <li>You have full control over whether and with whom you share. Sharing is initiated actively via iOS system dialogs.</li>
       <li>You can revoke the share at any time; further synchronisation of shared content then ends.</li>
       <li>Data transmission is TLS-encrypted and takes place exclusively through Apple's iCloud infrastructure.</li>
-      <li>Income data is <strong>not</strong> shared automatically — it is used only locally to calculate split ratios.</li>
+      <li>Income data is shared when Partner Sharing is active, so both devices can calculate the same household and split basis.</li>
     </ul>
   </div>
 
@@ -817,9 +843,9 @@
         <tbody>
           <tr><td class="right-label">Access</td><td><span class="article-badge">Art. 15</span></td><td>All data is visible directly within the App. On request we provide information in writing.</td></tr>
           <tr><td class="right-label">Rectification</td><td><span class="article-badge">Art. 16</span></td><td>Incorrect data can be edited directly in the App at any time.</td></tr>
-          <tr><td class="right-label">Erasure</td><td><span class="article-badge">Art. 17</span></td><td>Settings → Reset data, or uninstall the App.</td></tr>
+          <tr><td class="right-label">Erasure</td><td><span class="article-badge">Art. 17</span></td><td>Settings → Delete all data, or uninstall the App.</td></tr>
           <tr><td class="right-label">Restriction</td><td><span class="article-badge">Art. 18</span></td><td>iCloud sync can be disabled in iOS Settings.</td></tr>
-          <tr><td class="right-label">Data portability</td><td><span class="article-badge">Art. 20</span></td><td>Settings → Export (CSV) — all data in machine-readable format.</td></tr>
+          <tr><td class="right-label">Data portability</td><td><span class="article-badge">Art. 20</span></td><td>Settings → Data Management → Export backup (JSON) — all data in machine-readable format.</td></tr>
           <tr><td class="right-label">Withdrawal of consent</td><td><span class="article-badge">Art. 7 (3)</span></td><td>Profile photo, notifications and shares can be disabled at any time.</td></tr>
           <tr><td class="right-label">Objection</td><td><span class="article-badge">Art. 21</span></td><td>For processing based on Art. 6 (1) (f): write to <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>.</td></tr>
         </tbody>
@@ -862,20 +888,30 @@
       <h2>No analytics &amp; no advertising</h2>
     </div>
     <div class="no-tracking">✅ Finovo contains no analytics SDKs, no advertising networks, and no cross-app tracking.</div>
-    <p>No advertising device identifiers (IDFA) are used. The App Tracking Transparency (ATT) framework is not required. No user data is sold.</p>
+    <p>No advertising device identifiers (IDFA) are used. The App Tracking Transparency (ATT) framework is not required. No user data is sold. The Apple Intelligence features described below run only on device; Finovo does not activate Apple Private Cloud Compute.</p>
   </div>
 
   <div class="section">
     <div class="section-header">
       <div class="section-num">11</div>
-      <h2>Local notifications</h2>
+      <h2>Apple Intelligence / local AI features</h2>
     </div>
-    <p>The App can schedule local notifications (budget reminders, recurring transaction reminders). These are generated locally by iOS and are not sent via a server. Push notifications from the developer are not used for marketing purposes. Can be disabled under iOS Settings → Notifications → Finovo.</p>
+    <p>Finovo uses Apple's FoundationModels framework on compatible devices for local suggestions and summaries. This includes category suggestions during CSV import, merchant/payee text cleanup, monthly insights, goal coaching and natural-language search parsing.</p>
+    <p>Processing happens on device. No data is sent to developer-operated servers, third-party AI services or Apple Private Cloud Compute. Inputs may include bank descriptions, notes, goal names and aggregated financial numbers. Outputs such as cleaned merchant names and monthly insights may be stored locally; cleaned merchant names may sync with transactions if iCloud/Partner Sharing is active. If Apple Intelligence is unavailable or disabled, the App uses deterministic fallbacks.</p>
+    <p>AI outputs are suggestions and explanations. There is no automated decision-making with legal effect within the meaning of Art. 22 GDPR.</p>
   </div>
 
   <div class="section">
     <div class="section-header">
       <div class="section-num">12</div>
+      <h2>Local notifications &amp; APNs</h2>
+    </div>
+    <p>The App can schedule local notifications (budget reminders, recurring transaction reminders). These are generated locally by iOS. For CloudKit changes, Apple Push Notification service (APNs) may deliver silent background notifications; these contain no financial content and are not used for marketing. Can be disabled under iOS Settings → Notifications → Finovo.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">13</div>
       <h2>Children and minors</h2>
     </div>
     <p>Finovo is intended for users aged <strong>16 and older</strong>. We do not knowingly collect personal data from children under 16. Parents or guardians with questions may contact <a href="mailto:lukas@lukinet.de">lukas@lukinet.de</a>.</p>
@@ -883,7 +919,7 @@
 
   <div class="section">
     <div class="section-header">
-      <div class="section-num">13</div>
+      <div class="section-num">14</div>
       <h2>Changes to this Privacy Policy</h2>
     </div>
     <p>We reserve the right to adjust this Privacy Policy in the event of changes to the App or applicable law. The current version is always available at this URL and within the App under <em>Settings → About → Privacy Policy</em>. The date of the last change is shown at the top.</p>
