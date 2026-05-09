@@ -316,6 +316,10 @@
     display: block;
   }
 
+  .phone-screen img.shot-en { display: none; }
+  html[lang="en"] .phone-screen img.shot-de { display: none; }
+  html[lang="en"] .phone-screen img.shot-en { display: block; }
+
   .phone-label {
     font-size: 13px;
     font-weight: 600;
@@ -1361,11 +1365,12 @@
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
-          <img src="assets/screens/dashboard.png" loading="lazy" decoding="async" alt="Dashboard">
+          <img class="shot-de" src="assets/screens/de/dashboard.png" loading="lazy" decoding="async" alt="Finovo Dashboard">
+          <img class="shot-en" src="assets/screens/en/dashboard.png" loading="lazy" decoding="async" alt="Finovo dashboard">
         </div>
       </div>
       <div class="phone-label">Dashboard</div>
-      <div class="phone-label-sub"><span class="i18n-de">Bilanz & Jahresprognose</span><span class="i18n-en">Balance & forecast</span></div>
+      <div class="phone-label-sub"><span class="i18n-de">Monatsbilanz & Überblick</span><span class="i18n-en">Monthly balance & overview</span></div>
     </div>
 
     <!-- Transactions -->
@@ -1373,7 +1378,8 @@
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
-          <img src="assets/screens/transactions.png" loading="lazy" decoding="async" alt="Transaktionen">
+          <img class="shot-de" src="assets/screens/de/transactions.png" loading="lazy" decoding="async" alt="Finovo Transaktionen">
+          <img class="shot-en" src="assets/screens/en/transactions.png" loading="lazy" decoding="async" alt="Finovo transactions">
         </div>
       </div>
       <div class="phone-label"><span class="i18n-de">Transaktionen</span><span class="i18n-en">Transactions</span></div>
@@ -1385,7 +1391,8 @@
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
-          <img src="assets/screens/budgets.png" loading="lazy" decoding="async" alt="Budgets">
+          <img class="shot-de" src="assets/screens/de/budgets.png" loading="lazy" decoding="async" alt="Finovo Budgets">
+          <img class="shot-en" src="assets/screens/en/budgets.png" loading="lazy" decoding="async" alt="Finovo budgets">
         </div>
       </div>
       <div class="phone-label">Budgets</div>
@@ -1397,48 +1404,38 @@
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
-          <img src="assets/screens/sparziele.png" loading="lazy" decoding="async" alt="Sparziele">
+          <img class="shot-de" src="assets/screens/de/goals.png" loading="lazy" decoding="async" alt="Finovo Sparziele">
+          <img class="shot-en" src="assets/screens/en/goals.png" loading="lazy" decoding="async" alt="Finovo savings goals">
         </div>
       </div>
       <div class="phone-label"><span class="i18n-de">Sparziele</span><span class="i18n-en">Savings Goals</span></div>
       <div class="phone-label-sub"><span class="i18n-de">Träume verfolgen</span><span class="i18n-en">Track your dreams</span></div>
     </div>
 
-    <!-- New Transaction -->
+    <!-- CSV Import -->
     <div class="phone-item">
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
-          <img src="assets/screens/erfassen.png" loading="lazy" decoding="async" alt="Neue Transaktion">
+          <img class="shot-de" src="assets/screens/de/csv-import.png" loading="lazy" decoding="async" alt="Finovo CSV Import">
+          <img class="shot-en" src="assets/screens/en/csv-import.png" loading="lazy" decoding="async" alt="Finovo CSV import">
         </div>
       </div>
-      <div class="phone-label"><span class="i18n-de">Erfassen</span><span class="i18n-en">Quick Entry</span></div>
-      <div class="phone-label-sub"><span class="i18n-de">Schnell & einfach</span><span class="i18n-en">Fast & simple</span></div>
+      <div class="phone-label">CSV Import</div>
+      <div class="phone-label-sub"><span class="i18n-de">Bankumsätze übernehmen</span><span class="i18n-en">Import bank exports</span></div>
     </div>
 
-    <!-- Partner Mode Mock -->
+    <!-- Salary Split -->
     <div class="phone-item">
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
-          <div class="partner-mock">
-            <div class="pm-head"><span class="i18n-de">Partner Mode</span><span class="i18n-en">Partner Mode</span></div>
-            <div class="pm-avatars">
-              <div class="pm-avatar">L</div>
-              <div class="pm-avatar">S</div>
-            </div>
-            <div class="pm-title"><span class="i18n-de">Gemeinsamer Haushalt</span><span class="i18n-en">Shared Household</span></div>
-            <div class="pm-bar"><span class="pm-name">Lukas</span><span class="pm-amt">58 %</span></div>
-            <div class="pm-progress"><span style="width:58%"></span></div>
-            <div class="pm-bar"><span class="pm-name">Sophia</span><span class="pm-amt">42 %</span></div>
-            <div class="pm-progress"><span style="width:42%"></span></div>
-            <div class="pm-bar" style="margin-top:6px;"><span class="pm-name"><span class="i18n-de">Miete</span><span class="i18n-en">Rent</span></span><span class="pm-amt">1.200 €</span></div>
-            <div class="pm-bar"><span class="pm-name"><span class="i18n-de">Einkauf</span><span class="i18n-en">Groceries</span></span><span class="pm-amt">342 €</span></div>
-          </div>
+          <img class="shot-de" src="assets/screens/de/salary-split.png" loading="lazy" decoding="async" alt="Finovo Transaktion nach Gehalt aufteilen">
+          <img class="shot-en" src="assets/screens/en/salary-split.png" loading="lazy" decoding="async" alt="Finovo salary-based split transaction">
         </div>
       </div>
-      <div class="phone-label">Partner Mode</div>
-      <div class="phone-label-sub"><span class="i18n-de">Gemeinsam planen</span><span class="i18n-en">Plan together</span></div>
+      <div class="phone-label"><span class="i18n-de">Nach Gehalt</span><span class="i18n-en">By Salary</span></div>
+      <div class="phone-label-sub"><span class="i18n-de">Fair automatisch aufteilen</span><span class="i18n-en">Split fairly by income</span></div>
     </div>
 
   </div>
