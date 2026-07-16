@@ -13,6 +13,8 @@ website/070827/
 │   ├── main.js      # PIN keypad + gate animation, language toggle, RSVP logic
 │   └── i18n.js       # DE/EN copy strings
 ├── assets/          # watercolor gate + castle illustrations
+│   ├── gate-left.png / gate-right.png                  # mobile/portrait crop
+│   └── gate-left-desktop.png / gate-right-desktop.png  # wide crop, walls extended
 └── README.md
 ```
 
@@ -29,6 +31,11 @@ tested end-to-end.
 The design handoff itself is German-only; the DE/EN toggle from the
 original brief was kept and styled to match (small corner pill, top
 left), with English copy added on top.
+
+Above 900px width, the gate art switches (via a CSS media query) to a
+wider version with the walls/hedges extended so there's no visible
+page-background edge on desktop; narrower viewports keep the original
+portrait crop, which frames better on mobile.
 
 ## Design reference
 

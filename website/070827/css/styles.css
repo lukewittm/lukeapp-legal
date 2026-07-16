@@ -447,26 +447,13 @@ a:hover {
   background: #f8f8f8;
 }
 
-.gate-leaf img {
-  /* object-fit: cover (rather than a fixed max-width on .gate-leaves)
-     keeps the artwork filling the leaf edge-to-edge on wide desktop
-     viewports instead of leaving visible page background around it. */
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
 .gate-leaf-left {
   left: 0;
   transform-origin: left center;
   box-shadow: inset -22px 0 44px -20px rgba(80, 68, 40, .26);
-}
-
-.gate-leaf-left img {
-  object-position: right center;
+  background-image: url('../assets/gate-left.png');
+  background-size: cover;
+  background-position: right center;
 }
 
 .gate-shell.open .gate-leaf-left {
@@ -478,15 +465,27 @@ a:hover {
   right: 0;
   transform-origin: right center;
   box-shadow: inset 22px 0 44px -20px rgba(80, 68, 40, .26);
-}
-
-.gate-leaf-right img {
-  object-position: left center;
+  background-image: url('../assets/gate-right.png');
+  background-size: cover;
+  background-position: left center;
 }
 
 .gate-shell.open .gate-leaf-right {
   transform: rotateY(118deg);
   box-shadow: inset 24px 0 46px -20px rgba(80, 68, 40, .32), -40px 0 80px -12px rgba(45, 36, 16, .5);
+}
+
+/* Above ~900px the gate is wide enough to show the "continuing walls"
+   desktop artwork edge-to-edge; narrower viewports use the original
+   portrait-oriented crop so the gate doesn't zoom in too tight. */
+@media (min-width: 900px) {
+  .gate-leaf-left {
+    background-image: url('../assets/gate-left-desktop.png');
+  }
+
+  .gate-leaf-right {
+    background-image: url('../assets/gate-right-desktop.png');
+  }
 }
 
 .leaf-edge-shadow {
