@@ -44,6 +44,17 @@ source assets) is not stored in this repo — ask for it again if the
 design needs revisiting. Key values (colors, type, spacing, motion
 timings) are documented as comments/tokens directly in `css/styles.css`.
 
+## Cache-busting
+
+`css/styles.css` and `js/*.js` are linked with a `?v=N` query string in
+`index.html`. GitHub Pages' CDN caches these for ~10 minutes, and browsers
+cache them separately on top of that — without a version bump, visitors
+(and you, testing right after a push) can end up with a stale mix of old
+CSS and new HTML. **Bump `v` on every deploy that touches `styles.css`,
+`main.js`, or `i18n.js`**, or changes may not show up for several minutes,
+and cache staleness can desync CSS from HTML in confusing ways (e.g. an
+element referenced in fresh HTML but not yet styled by cached CSS).
+
 ## Known follow-ups
 
 - [ ] The watercolor PNGs in `assets/` are large (1.5–2MB each, ~5MB
