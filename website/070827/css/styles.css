@@ -418,8 +418,10 @@ a:hover {
   animation: scdShake .48s ease;
 }
 
-.gate-shell.open .gate-leaves,
-.gate-shell.open .keypad-group {
+.gate-shell.open {
+  /* Otherwise this full-viewport, transparent, z-index:30 shell keeps
+     swallowing clicks meant for #site-content underneath (video/RSVP
+     buttons) even after the leaves swing open. */
   pointer-events: none;
 }
 
