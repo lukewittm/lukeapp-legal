@@ -1,16 +1,649 @@
 /* Save the Date — Lukas & Celine
-   Design direction: minimal, watercolor chateau aesthetic, white/cream palette.
-   Styles to be filled in once design direction is finalized. */
+   "Filigree Gate · Classic" — recreated from the Claude Design handoff
+   (design_handoff_save_the_date). Colors/type/spacing/motion values below
+   are the confirmed design tokens — keep in sync with future design
+   updates rather than eyeballing new values. */
 
-:root {
-  --color-bg: #ffffff;
-  --color-text: #2b2b2b;
-  --color-accent: #a3b899; /* placeholder muted green, adjust to match watercolor palette */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
 }
 
 body {
-  margin: 0;
-  font-family: Georgia, 'Times New Roman', serif;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background: #f8f8f8;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: #8a7f4b;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #6f6638;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@keyframes scdShake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-7px); }
+  30% { transform: translateX(7px); }
+  45% { transform: translateX(-5px); }
+  60% { transform: translateX(5px); }
+  80% { transform: translateX(-2px); }
+}
+
+/* ---------- Save-the-date card ---------- */
+
+#site-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  background: #f8f8f8;
+}
+
+#site-content main {
+  width: 100%;
+  max-width: 680px;
+  padding: clamp(40px, 7vw, 88px) clamp(24px, 6vw, 64px) 72px;
+  text-align: center;
+}
+
+.castle-wrap {
+  margin: 0 auto 6px;
+  max-width: min(78vw, 440px);
+}
+
+.castle-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#site-content h1 {
+  font-family: 'Pinyon Script';
+  font-weight: 400;
+  font-size: clamp(54px, 9vw, 78px);
+  line-height: 1;
+  color: #5a5940;
+  margin: 8px 0 0;
+}
+
+.save-the-date-label {
+  font-family: 'Cormorant Garamond';
+  letter-spacing: .46em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 1.6vw, 15px);
+  color: #7d7b5a;
+  margin: 14px 0 0;
+  padding-left: .46em;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin: 26px 0 0;
+}
+
+.divider-line {
+  height: 1px;
+  width: clamp(38px, 8vw, 64px);
+}
+
+.divider-line-left {
+  background: linear-gradient(90deg, transparent, #c8a24e);
+}
+
+.divider-line-right {
+  background: linear-gradient(90deg, #c8a24e, transparent);
+}
+
+.divider-diamond {
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  background: #c8a24e;
+}
+
+.couple-names {
+  font-family: 'Cormorant Garamond';
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  font-size: clamp(16px, 2.2vw, 20px);
+  color: #3f3d2c;
+  margin: 20px 0 0;
+}
+
+.wedding-date-label {
+  font-family: 'Cormorant Garamond';
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 1.5vw, 14px);
+  color: #8a866c;
+  margin: 8px 0 0;
+}
+
+.intro-line {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-size: clamp(18px, 2.3vw, 21px);
+  line-height: 1.55;
+  color: #6b6653;
+  max-width: 34ch;
+  margin: 24px auto 0;
+}
+
+.venue-line {
+  font-family: 'Cormorant Garamond';
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: clamp(12px, 1.5vw, 13px);
+  color: #9a957b;
+  margin: 22px 0 0;
+}
+
+.video-wrapper {
+  margin: 30px auto 0;
+  max-width: 560px;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: repeating-linear-gradient(135deg, #efe9db, #efe9db 9px, #e7e0cd 9px, #e7e0cd 18px);
+  border: 1px solid #e2dbc6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.play-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(248, 248, 248, .94);
+  border: 1px solid #c8a24e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-icon::before {
+  content: "";
+  border-left: 15px solid #8a7f4b;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin-left: 4px;
+}
+
+.video-embed {
+  position: absolute;
+  inset: 0;
+}
+
+.video-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.rsvp-button {
+  margin: 34px 0 0;
+  font-family: 'Cormorant Garamond';
+  font-weight: 500;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  font-size: clamp(13px, 1.7vw, 15px);
+  color: #5a5940;
+  background: transparent;
+  border: 1px solid #8a7f4b;
+  border-radius: 2px;
+  padding: 15px 52px;
+  cursor: pointer;
+  transition: all .25s;
+}
+
+.rsvp-button:hover {
+  background: #8a7f4b;
+  color: #f8f8f8;
+}
+
+.footnote {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-size: clamp(13px, 1.5vw, 14px);
+  color: #a49c82;
+  margin: 16px 0 40px;
+}
+
+/* ---------- RSVP modal ---------- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(58, 54, 34, .36);
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #f6f2e8;
+  border-radius: 6px;
+  border: 1px solid #ddd4bf;
+  box-shadow: 0 30px 60px -20px rgba(58, 54, 34, .5);
+  padding: 32px 28px 30px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #a49c82;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.rsvp-success {
+  text-align: center;
+  padding: 22px 4px;
+}
+
+.rsvp-success-title {
+  font-family: 'Pinyon Script';
+  font-size: 46px;
+  color: #8a7f4b;
+  line-height: 1;
+}
+
+.rsvp-success p {
+  font-family: 'Cormorant Garamond';
+  font-size: 17px;
+  color: #6b6653;
+  font-style: italic;
+  margin: 10px 0 0;
+}
+
+.rsvp-title {
+  text-align: center;
+  font-family: 'Pinyon Script';
+  font-size: 40px;
+  color: #8a7f4b;
+  line-height: 1;
+}
+
+.rsvp-subtitle {
+  text-align: center;
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-size: 14px;
+  color: #8a866c;
+  margin: 4px 0 20px;
+}
+
+.guest-input {
+  width: 100%;
+  font-family: 'Cormorant Garamond';
+  font-size: 17px;
+  color: #3f3d2c;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #cdc7b1;
+  padding: 9px 2px;
+  margin: 0 0 12px;
+  outline: none;
+}
+
+.add-guest-btn {
+  font-family: 'Cormorant Garamond';
+  font-size: 14px;
+  color: #8a7f4b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: .04em;
+  padding: 0 0 4px;
+}
+
+.attendance-toggle {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0 22px;
+}
+
+.attend-btn {
+  flex: 1;
+  font-family: 'Cormorant Garamond';
+  font-size: 15px;
+  padding: 12px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .2s;
+  background: transparent;
+  color: #6b6653;
+  border: 1px solid #d8cdb8;
+}
+
+.attend-btn.selected-yes {
+  background: #8a7f4b;
+  color: #fff;
+  border-color: #8a7f4b;
+}
+
+.attend-btn.selected-no {
+  background: #8a7f6c;
+  color: #fff;
+  border-color: #8a7f6c;
+}
+
+.rsvp-submit {
+  width: 100%;
+  font-family: 'Cormorant Garamond';
+  font-weight: 500;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #f8f8f8;
+  background: #8a7f4b;
+  border: none;
+  border-radius: 3px;
+  padding: 14px;
+  cursor: pointer;
+}
+
+.rsvp-error {
+  font-family: 'Cormorant Garamond';
+  font-size: 14px;
+  color: #a1503f;
+  text-align: center;
+  margin: 12px 0 0;
+}
+
+/* ---------- Gate / PIN screen ---------- */
+
+.gate-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  perspective: 2600px;
+  display: flex;
+  justify-content: center;
+}
+
+.gate-shell.shake {
+  animation: scdShake .48s ease;
+}
+
+.gate-shell.open .gate-leaves,
+.gate-shell.open .keypad-group {
+  pointer-events: none;
+}
+
+.gate-backdrop {
+  position: absolute;
+  inset: 0;
+  background: #f8f8f8;
+  opacity: 1;
+  transition: opacity 1s .4s;
+  pointer-events: none;
+}
+
+.gate-shell.open .gate-backdrop {
+  opacity: 0;
+}
+
+.corner-btn {
+  position: absolute;
+  top: 16px;
+  z-index: 60;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ddd4bf;
+  background: rgba(248, 248, 248, .9);
+  color: #a49c82;
+  font-size: 13px;
+  font-family: 'Cormorant Garamond';
+  letter-spacing: .04em;
+  cursor: pointer;
+  line-height: 1;
+  pointer-events: auto;
+}
+
+.corner-btn-left {
+  left: 16px;
+}
+
+.corner-btn-right {
+  right: 16px;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.gate-shell.open .corner-btn-right {
+  opacity: 1;
+}
+
+.gate-leaves {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  height: 100%;
+}
+
+.gate-leaf {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  transition: transform 1.9s cubic-bezier(.58, .03, .16, 1), box-shadow 1.9s cubic-bezier(.58, .03, .16, 1);
+  backface-visibility: hidden;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+
+.gate-leaf img {
+  position: absolute;
+  top: 50%;
+  height: 100%;
+  min-height: 640px;
+  width: auto;
+  transform: translateY(-50%);
+  display: block;
+}
+
+.gate-leaf-left {
+  left: 0;
+  transform-origin: left center;
+  box-shadow: inset -22px 0 44px -20px rgba(80, 68, 40, .26);
+}
+
+.gate-leaf-left img {
+  right: 0;
+}
+
+.gate-shell.open .gate-leaf-left {
+  transform: rotateY(-118deg);
+  box-shadow: inset -24px 0 46px -20px rgba(80, 68, 40, .32), 40px 0 80px -12px rgba(45, 36, 16, .5);
+}
+
+.gate-leaf-right {
+  right: 0;
+  transform-origin: right center;
+  box-shadow: inset 22px 0 44px -20px rgba(80, 68, 40, .26);
+}
+
+.gate-leaf-right img {
+  left: 0;
+}
+
+.gate-shell.open .gate-leaf-right {
+  transform: rotateY(118deg);
+  box-shadow: inset 24px 0 46px -20px rgba(80, 68, 40, .32), -40px 0 80px -12px rgba(45, 36, 16, .5);
+}
+
+.leaf-edge-shadow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.leaf-edge-shadow-left {
+  background: linear-gradient(90deg, rgba(88, 74, 40, .14), rgba(88, 74, 40, 0) 34%);
+}
+
+.leaf-edge-shadow-right {
+  background: linear-gradient(270deg, rgba(88, 74, 40, .14), rgba(88, 74, 40, 0) 34%);
+}
+
+.leaf-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.9s;
+}
+
+.gate-leaf-left .leaf-shade {
+  background: linear-gradient(90deg, rgba(60, 50, 26, .5), rgba(60, 50, 26, 0) 60%);
+}
+
+.gate-leaf-right .leaf-shade {
+  background: linear-gradient(270deg, rgba(60, 50, 26, .5), rgba(60, 50, 26, 0) 60%);
+}
+
+.gate-shell.open .leaf-shade {
+  opacity: .92;
+}
+
+.keypad-group {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 1;
+  transition: opacity .5s;
+}
+
+.gate-shell.open .keypad-group {
+  opacity: 0;
+}
+
+.welcome-panel {
+  text-align: center;
+  background: rgba(248, 248, 248, .9);
+  padding: 18px 30px;
+  border-radius: 4px;
+  border: 1px solid rgba(200, 162, 78, .55);
+  box-shadow: 0 12px 34px -12px rgba(90, 78, 45, .42);
+}
+
+.welcome-title {
+  font-family: 'Pinyon Script';
+  font-size: clamp(42px, 6vw, 54px);
+  color: #5a5940;
+  line-height: 1;
+}
+
+.welcome-subtitle {
+  font-family: 'Cormorant Garamond';
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #8a866c;
+  margin-top: 6px;
+}
+
+.pin-dots {
+  display: flex;
+  gap: 14px;
+}
+
+.pin-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid #b8892f;
+  background: transparent;
+  transition: background .15s;
+}
+
+.pin-dot.filled {
+  background: #b8892f;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 66px);
+  gap: 13px;
+}
+
+.keypad-key {
+  height: 66px;
+  border-radius: 50%;
+  border: 1px solid rgba(138, 127, 75, .45);
+  background: rgba(248, 248, 248, .72);
+  color: #5a5940;
+  font-family: 'Cormorant Garamond';
+  font-size: 24px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.keypad-key:hover {
+  background: rgba(200, 162, 78, .22);
+}
+
+.keypad-key.keypad-key-blank {
+  visibility: hidden;
+  cursor: default;
 }
