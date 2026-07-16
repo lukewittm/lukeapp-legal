@@ -212,6 +212,65 @@ a:hover {
   margin: 16px 0 40px;
 }
 
+/* Modest scale-up (~18-20%) for the save-the-date card on wide desktop
+   screens, so it doesn't read small in all that whitespace. Deliberately
+   restrained to keep the type feeling elegant rather than oversized —
+   only the upper clamp() bound moves, mobile/tablet sizing is untouched. */
+@media (min-width: 1200px) {
+  #site-content main {
+    max-width: 820px;
+  }
+
+  .castle-wrap {
+    max-width: min(60vw, 520px);
+  }
+
+  #site-content h1 {
+    font-size: clamp(54px, 6vw, 92px);
+  }
+
+  .save-the-date-label {
+    font-size: clamp(12px, 1.3vw, 18px);
+  }
+
+  .divider-line {
+    width: clamp(38px, 6vw, 76px);
+  }
+
+  .couple-names {
+    font-size: clamp(16px, 1.7vw, 24px);
+  }
+
+  .wedding-date-label {
+    font-size: clamp(12px, 1.3vw, 17px);
+  }
+
+  .video-intro-line {
+    font-size: clamp(17px, 1.8vw, 24px);
+  }
+
+  .video-wrapper {
+    max-width: 640px;
+  }
+
+  .intro-line {
+    font-size: clamp(18px, 1.9vw, 25px);
+  }
+
+  .venue-line {
+    font-size: clamp(12px, 1.3vw, 16px);
+  }
+
+  .rsvp-button {
+    font-size: clamp(13px, 1.4vw, 18px);
+    padding: 18px 64px;
+  }
+
+  .footnote {
+    font-size: clamp(13px, 1.3vw, 16px);
+  }
+}
+
 /* ---------- RSVP modal ---------- */
 
 .modal {
