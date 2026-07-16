@@ -11,7 +11,7 @@ const copy = {
     introLine: "Nur das Datum steht schon fest — den Rest liefert euch bald unsere Brieftaube.",
     venueLine: "Schloss Faber-Castell · Stein bei Nürnberg",
     playVideo: "Video abspielen",
-    rsvpButton: "RSVP",
+    rsvpButton: "Seid ihr dabei?",
     footnote: "Weitere Infos folgen bald.",
     welcomeTitle: "Willkommen",
     pinLabel: "PIN eingeben",
