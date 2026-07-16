@@ -4,7 +4,6 @@
 
 const CORRECT_PIN = "0708";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/meeyegwj";
-const YOUTUBE_VIDEO_ID = "Sw1Jog7TY4o";
 const MAX_GUESTS = 6;
 
 let currentLang = "de";
@@ -124,26 +123,6 @@ function buildKeypad() {
   });
 }
 
-/* ---------- Video ---------- */
-
-function initVideo() {
-  const thumb = document.getElementById("video-thumb");
-  const embed = document.getElementById("video-embed");
-
-  thumb.addEventListener("click", () => {
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0`;
-    iframe.title = "Save the date video";
-    iframe.frameBorder = "0";
-    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-    iframe.allowFullscreen = true;
-
-    embed.appendChild(iframe);
-    embed.hidden = false;
-    thumb.hidden = true;
-  });
-}
-
 /* ---------- RSVP modal ---------- */
 
 function initRsvpModal() {
@@ -241,7 +220,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("reset-gate").addEventListener("click", closeGate);
 
-  initVideo();
   initRsvpModal();
 
   if (sessionStorage.getItem("std-pin-verified") === "true") {
